@@ -1,9 +1,8 @@
 
 
 CREATE TABLE User (
-UserId                      INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+Email                       VARCHAR(150) NOT NULL PRIMARY KEY,
 DisplayName                 VARCHAR(100) NOT NULL,
-Email                       VARCHAR(150) NOT NULL,
 PDGA_Nr                     INTEGER,
 PictureURL                  VARCHAR(300),
 Password                    VARCHAR(20) NOT NULL
