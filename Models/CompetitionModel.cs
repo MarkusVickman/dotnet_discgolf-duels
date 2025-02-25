@@ -17,8 +17,9 @@ namespace discgolf_duels.Models
         public int MaxPlayerCount { get; set; }
 
         [Required]
-        public int UserId { get; set; }
-        [ForeignKey("UserId")]
-        public User User { get; set; }
+        [StringLength(150)]
+        public string UserEmail { get; set; } // Ändra typen till string och använd Email som främmande nyckel
+        [ForeignKey("UserEmail")]
+        public ApplicationUser User { get; set; }
     }
 }
