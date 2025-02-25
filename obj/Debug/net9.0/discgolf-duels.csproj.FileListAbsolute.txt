@@ -276,3 +276,4 @@ C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\discgolf-duels.pdb
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\discgolf-duels.genruntimeconfig.cache
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\ref\discgolf-duels.dll
+C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\discgolf-duels.sourcelink.json
