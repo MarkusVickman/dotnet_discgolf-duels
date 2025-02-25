@@ -15,8 +15,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<Course> Courses { get; set; }
 
-    //public DbSet<Friend> Friends { get; set; }
-
     public DbSet<Play> Plays { get; set; }
+
+    public DbSet<Playing> Playing { get; set; }
+
+    public DbSet<Registration> Registrations { get; set; }
+
+    //public DbSet<Friend> Friends { get; set; }
 
 }

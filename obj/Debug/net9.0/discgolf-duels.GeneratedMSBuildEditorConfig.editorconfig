@@ -100,6 +100,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Playing/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWluZ1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Playing/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWluZ1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Playing/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWluZ1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Playing/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWluZ1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Playing/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWluZ1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Play/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -118,6 +138,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Play/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Registration/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Registration/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Registration/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Registration/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Registration/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/marku/Desktop/webbutveckling-ht2024/dotnet_kurs/projekt/discgolf-duels/Views/Shared/Error.cshtml]

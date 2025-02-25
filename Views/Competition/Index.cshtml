@@ -13,9 +13,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RegisterDate)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CompetitionDate)
             </th>
             <th>
@@ -30,9 +27,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegisterDate)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CompetitionDate)
             </td>

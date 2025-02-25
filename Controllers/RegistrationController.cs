@@ -10,23 +10,23 @@ using discgolf_duels.Models;
 
 namespace discgolf_duels.Controllers
 {
-    public class PlayController : Controller
+    public class RegistrationController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public PlayController(ApplicationDbContext context)
+        public RegistrationController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Play
+        // GET: Registration
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Plays.Include(p => p.Competition).Include(p => p.Course);
+            var applicationDbContext = _context.Registrations.Include(r => r.Competition).Include(r => r.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Play/Details/5
+        // GET: Registration/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +34,45 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
-            var play = await _context.Plays
-                .Include(p => p.Competition)
-                .Include(p => p.Course)
-                .FirstOrDefaultAsync(m => m.PlayId == id);
-            if (play == null)
+            var registration = await _context.Registrations
+                .Include(r => r.Competition)
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(m => m.RegistrationId == id);
+            if (registration == null)
             {
                 return NotFound();
             }
 
-            return View(play);
+            return View(registration);
         }
 
-        // GET: Play/Create
+        // GET: Registration/Create
         public IActionResult Create()
         {
             ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail");
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Play/Create
+        // POST: Registration/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlayId,CompetitionId,CourseId,Active")] Play play)
+        public async Task<IActionResult> Create([Bind("RegistrationId,CompetitionId,UserId,RegisterDate")] Registration registration)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(play);
+                _context.Add(registration);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail", play.CompetitionId);
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", play.CourseId);
-            return View(play);
+            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail", registration.CompetitionId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", registration.UserId);
+            return View(registration);
         }
 
-        // GET: Play/Edit/5
+        // GET: Registration/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +80,24 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
-            var play = await _context.Plays.FindAsync(id);
-            if (play == null)
+            var registration = await _context.Registrations.FindAsync(id);
+            if (registration == null)
             {
                 return NotFound();
             }
-            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail", play.CompetitionId);
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", play.CourseId);
-            return View(play);
+            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail", registration.CompetitionId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", registration.UserId);
+            return View(registration);
         }
 
-        // POST: Play/Edit/5
+        // POST: Registration/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PlayId,CompetitionId,CourseId,Active")] Play play)
+        public async Task<IActionResult> Edit(int id, [Bind("RegistrationId,CompetitionId,UserId,RegisterDate")] Registration registration)
         {
-            if (id != play.PlayId)
+            if (id != registration.RegistrationId)
             {
                 return NotFound();
             }
@@ -106,12 +106,12 @@ namespace discgolf_duels.Controllers
             {
                 try
                 {
-                    _context.Update(play);
+                    _context.Update(registration);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlayExists(play.PlayId))
+                    if (!RegistrationExists(registration.RegistrationId))
                     {
                         return NotFound();
                     }
@@ -122,12 +122,12 @@ namespace discgolf_duels.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail", play.CompetitionId);
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", play.CourseId);
-            return View(play);
+            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail", registration.CompetitionId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", registration.UserId);
+            return View(registration);
         }
 
-        // GET: Play/Delete/5
+        // GET: Registration/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,36 +135,36 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
-            var play = await _context.Plays
-                .Include(p => p.Competition)
-                .Include(p => p.Course)
-                .FirstOrDefaultAsync(m => m.PlayId == id);
-            if (play == null)
+            var registration = await _context.Registrations
+                .Include(r => r.Competition)
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(m => m.RegistrationId == id);
+            if (registration == null)
             {
                 return NotFound();
             }
 
-            return View(play);
+            return View(registration);
         }
 
-        // POST: Play/Delete/5
+        // POST: Registration/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var play = await _context.Plays.FindAsync(id);
-            if (play != null)
+            var registration = await _context.Registrations.FindAsync(id);
+            if (registration != null)
             {
-                _context.Plays.Remove(play);
+                _context.Registrations.Remove(registration);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PlayExists(int id)
+        private bool RegistrationExists(int id)
         {
-            return _context.Plays.Any(e => e.PlayId == id);
+            return _context.Registrations.Any(e => e.RegistrationId == id);
         }
     }
 }

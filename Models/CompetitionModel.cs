@@ -9,8 +9,6 @@ namespace discgolf_duels.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CompetitionId { get; set; }
 
-        public DateTime? RegisterDate { get; set; }
-
         public DateTime? CompetitionDate { get; set; }
 
         [Required]
@@ -21,5 +19,8 @@ namespace discgolf_duels.Models
         public string UserEmail { get; set; } // Ändra typen till string och använd Email som främmande nyckel
         [ForeignKey("UserEmail")]
         public ApplicationUser User { get; set; }
+
+        // Ny lista för att hantera registreringar
+        public ICollection<Registration> Registrations { get; set; }
     }
 }

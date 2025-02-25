@@ -1,4 +1,4 @@
-@model discgolf_duels.Models.Competition
+@model discgolf_duels.Models.Playing
 
 @{
     ViewData["Title"] = "Details";
@@ -7,20 +7,26 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Competition</h4>
+    <h4>Playing</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CompetitionDate)
+            @Html.DisplayNameFor(model => model.Play)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CompetitionDate)
+            @Html.DisplayFor(model => model.Play.PlayId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaxPlayerCount)
+            @Html.DisplayNameFor(model => model.Par)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaxPlayerCount)
+            @Html.DisplayFor(model => model.Par)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GroupNr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GroupNr)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.User)
@@ -31,6 +37,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.CompetitionId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.PlayingId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
