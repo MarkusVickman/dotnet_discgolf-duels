@@ -38,20 +38,23 @@ namespace discgolf_duels.Controllers
             int userId = thisPublicUser.PublicUserId;
 
             var applicationDbContext = _context.Competitions
+            .Include(c => c.Course)
             .Include(c => c.PublicUser)
             .Where(c => c.PublicUserId == userId);
 
             return View(await applicationDbContext.ToListAsync());
         }
 
-         // GET: Competition
+        // GET: Competition
         public async Task<IActionResult> ListAll()
-        {        
+        {
             var applicationDbContext = _context.Competitions
+            .Include(c => c.Course)
             .Include(c => c.PublicUser);
 
             return View(await applicationDbContext.ToListAsync());
         }
+
 
         // GET: Competition/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -62,6 +65,7 @@ namespace discgolf_duels.Controllers
             }
 
             var competition = await _context.Competitions
+                .Include(c => c.Course)
                 .Include(c => c.PublicUser)
                 .FirstOrDefaultAsync(m => m.CompetitionId == id);
             if (competition == null)
@@ -75,6 +79,7 @@ namespace discgolf_duels.Controllers
         // GET: Competition/Create
         public IActionResult Create()
         {
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName");
             ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName");
             return View();
         }
@@ -84,7 +89,7 @@ namespace discgolf_duels.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CompetitionId,CompetitionName,CompetitionDate,MaxPlayerCount,PublicUserId")] Competition competition)
+        public async Task<IActionResult> Create([Bind("CompetitionId,CompetitionName,CourseId,CompetitionDate,MaxPlayerCount,PublicUserId")] Competition competition)
         {
             if (ModelState.IsValid)
             {
@@ -92,6 +97,7 @@ namespace discgolf_duels.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", competition.CourseId);
             ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", competition.PublicUserId);
             return View(competition);
         }
@@ -109,6 +115,7 @@ namespace discgolf_duels.Controllers
             {
                 return NotFound();
             }
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", competition.CourseId);
             ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", competition.PublicUserId);
             return View(competition);
         }
@@ -118,7 +125,7 @@ namespace discgolf_duels.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CompetitionId,CompetitionName,CompetitionDate,MaxPlayerCount,PublicUserId")] Competition competition)
+        public async Task<IActionResult> Edit(int id, [Bind("CompetitionId,CompetitionName,CourseId,CompetitionDate,MaxPlayerCount,PublicUserId")] Competition competition)
         {
             if (id != competition.CompetitionId)
             {
@@ -145,6 +152,7 @@ namespace discgolf_duels.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", competition.CourseId);
             ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", competition.PublicUserId);
             return View(competition);
         }
@@ -158,6 +166,7 @@ namespace discgolf_duels.Controllers
             }
 
             var competition = await _context.Competitions
+                .Include(c => c.Course)
                 .Include(c => c.PublicUser)
                 .FirstOrDefaultAsync(m => m.CompetitionId == id);
             if (competition == null)

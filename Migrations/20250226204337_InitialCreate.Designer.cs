@@ -8,11 +8,11 @@ using discgolf_duels.Data;
 
 #nullable disable
 
-namespace discgolf_duels.Data.Migrations
+namespace discgolf_duels.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250226094351_TestUserId")]
-    partial class TestUserId
+    [Migration("20250226204337_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -222,8 +222,15 @@ namespace discgolf_duels.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("CompetitionDate")
+                    b.Property<DateTime>("CompetitionDate")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("CompetitionName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("MaxPlayerCount")
                         .HasColumnType("INTEGER");
@@ -232,6 +239,8 @@ namespace discgolf_duels.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("CompetitionId");
+
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("PublicUserId");
 
@@ -413,11 +422,19 @@ namespace discgolf_duels.Data.Migrations
 
             modelBuilder.Entity("discgolf_duels.Models.Competition", b =>
                 {
+                    b.HasOne("discgolf_duels.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("discgolf_duels.Models.PublicUser", "PublicUser")
                         .WithMany()
                         .HasForeignKey("PublicUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Course");
 
                     b.Navigation("PublicUser");
                 });

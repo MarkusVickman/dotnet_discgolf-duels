@@ -49,7 +49,7 @@ namespace discgolf_duels.Controllers
         // GET: Play/Create
         public async Task<IActionResult> Create(int id)
         {
-            if (id == 0)
+            if (id != 0)
             {
                 var competition = await _context.Competitions.FindAsync(id);
 
@@ -57,29 +57,31 @@ namespace discgolf_duels.Controllers
                 .Include(r => r.Competition)
                 .Include(r => r.PublicUser)
                 .Where(r => r.CompetitionId == id)
-                .ToList();
+                .ToListAsync();
 
-                var course = await _context.Courses.Where(c => c.CourseId == competition.CourseId);
+                var course = _context.Courses.FirstOrDefault(c => c.CourseId == competition.CourseId);
 
-                Play play = {
+                Play play = new Play
+                {
                     CompetitionId = id,
-                    CourseId = course.Courseid
-            };
+                    CourseId = course.CourseId
+                };
 
                 _context.Plays.Add(play);
                 await _context.SaveChangesAsync();
 
-                var thisPlay = await _context.Plays.Where(c => c.CompetitionId == id);
+                var thisPlay = _context.Plays.FirstOrDefault(c => c.CompetitionId == id);
 
                 foreach (var registration in thisRegistrations)
                 {
 
-                    Playing playing = {
-                    PlayId = thisPlay.PlayId,
-                    Par = course.Par,
-                    GroupNr = null,
-                    PublicUserId = registration.PublicUserId
-            };
+                    Playing playing = new Playing
+                    {
+                        PlayId = thisPlay.PlayId,
+                        Par = course?.Par,
+                        GroupNr = null,
+                        PublicUserId = registration.PublicUserId
+                    };
 
                     _context.Playing.Add(playing);
                 }

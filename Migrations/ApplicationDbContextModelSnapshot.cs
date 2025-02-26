@@ -2,20 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using discgolf_duels.Data;
 
 #nullable disable
 
-namespace discgolf_duels.Data.Migrations
+namespace discgolf_duels.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250226090549_ChangeUserTable")]
-    partial class ChangeUserTable
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
@@ -222,8 +219,15 @@ namespace discgolf_duels.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("CompetitionDate")
+                    b.Property<DateTime>("CompetitionDate")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("CompetitionName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("MaxPlayerCount")
                         .HasColumnType("INTEGER");
@@ -232,6 +236,8 @@ namespace discgolf_duels.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("CompetitionId");
+
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("PublicUserId");
 
@@ -319,8 +325,7 @@ namespace discgolf_duels.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("PDGA_Nr")
@@ -332,9 +337,9 @@ namespace discgolf_duels.Data.Migrations
 
                     b.HasKey("PublicUserId");
 
-                    b.HasIndex("Email");
+                    b.HasIndex("Id");
 
-                    b.ToTable("PublicUser");
+                    b.ToTable("PublicUsers");
                 });
 
             modelBuilder.Entity("discgolf_duels.Models.Registration", b =>
@@ -414,11 +419,19 @@ namespace discgolf_duels.Data.Migrations
 
             modelBuilder.Entity("discgolf_duels.Models.Competition", b =>
                 {
+                    b.HasOne("discgolf_duels.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("discgolf_duels.Models.PublicUser", "PublicUser")
                         .WithMany()
                         .HasForeignKey("PublicUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Course");
 
                     b.Navigation("PublicUser");
                 });
@@ -463,9 +476,7 @@ namespace discgolf_duels.Data.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("Email")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Id");
 
                     b.Navigation("IdentityUser");
                 });

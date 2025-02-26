@@ -65,8 +65,24 @@ namespace discgolf_duels.Controllers
         }
 
         // GET: Playing/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int id)
         {
+            if (id != 0)
+            {
+                string Id = _userManager.GetUserId(User);
+                var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+
+                if (thisPublicUser == null)
+                {
+                    // Hantera fallet där PublicUser inte hittas
+                    // Om PublicUser inte hittas, gör en redirect till PublicUser/Create
+                    return RedirectToAction("Create", "PublicUser");
+                }
+
+                ViewBag.PublicUserId = thisPublicUser.PublicUserId;
+                ViewBag.PlayId = id;
+
+            }
             ViewData["PlayId"] = new SelectList(_context.Plays, "PlayId", "PlayId");
             ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName");
             return View();

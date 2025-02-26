@@ -19,6 +19,11 @@
                 <span asp-validation-for="CompetitionName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="CourseId" class="control-label"></label>
+                <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId"></select>
+                <span asp-validation-for="CourseId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="CompetitionDate" class="control-label"></label>
                 <input asp-for="CompetitionDate" class="form-control" />
                 <span asp-validation-for="CompetitionDate" class="text-danger"></span>
@@ -45,5 +50,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
