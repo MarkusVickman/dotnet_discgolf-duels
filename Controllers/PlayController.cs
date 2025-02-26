@@ -47,10 +47,49 @@ namespace discgolf_duels.Controllers
         }
 
         // GET: Play/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int id)
         {
-            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail");
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId");
+            if (id == 0)
+            {
+                var competition = await _context.Competitions.FindAsync(id);
+
+                var thisRegistrations = await _context.Registrations
+                .Include(r => r.Competition)
+                .Include(r => r.PublicUser)
+                .Where(r => r.CompetitionId == id)
+                .ToList();
+
+                var course = await _context.Courses.Where(c => c.CourseId == competition.CourseId);
+
+                Play play = {
+                    CompetitionId = id,
+                    CourseId = course.Courseid
+            };
+
+                _context.Plays.Add(play);
+                await _context.SaveChangesAsync();
+
+                var thisPlay = await _context.Plays.Where(c => c.CompetitionId == id);
+
+                foreach (var registration in thisRegistrations)
+                {
+
+                    Playing playing = {
+                    PlayId = thisPlay.PlayId,
+                    Par = course.Par,
+                    GroupNr = null,
+                    PublicUserId = registration.PublicUserId
+            };
+
+                    _context.Playing.Add(playing);
+                }
+            }
+
+            else
+            {
+                ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId");
+                ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName");
+            }
             return View();
         }
 
@@ -67,8 +106,8 @@ namespace discgolf_duels.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail", play.CompetitionId);
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", play.CourseId);
+            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId", play.CompetitionId);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", play.CourseId);
             return View(play);
         }
 
@@ -85,8 +124,8 @@ namespace discgolf_duels.Controllers
             {
                 return NotFound();
             }
-            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail", play.CompetitionId);
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", play.CourseId);
+            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId", play.CompetitionId);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", play.CourseId);
             return View(play);
         }
 
@@ -122,8 +161,8 @@ namespace discgolf_duels.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "UserEmail", play.CompetitionId);
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseId", play.CourseId);
+            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId", play.CompetitionId);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", play.CourseId);
             return View(play);
         }
 

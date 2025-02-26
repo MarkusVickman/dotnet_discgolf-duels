@@ -11,18 +11,19 @@ using Microsoft.AspNetCore.Identity;
 
 namespace discgolf_duels.Controllers
 {
-    public class PlayingController : Controller
+    public class PublicUserController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public PlayingController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public PublicUserController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
+
         }
 
-        // GET: Playing
+        // GET: PublicUser
         public async Task<IActionResult> Index()
         {
             string Id = _userManager.GetUserId(User);
@@ -37,14 +38,13 @@ namespace discgolf_duels.Controllers
 
             int userId = thisPublicUser.PublicUserId;
 
-            var applicationDbContext = _context.Playing
-            .Include(p => p.Play)
-            .Include(p => p.PublicUser)
+            var applicationDbContext = _context.PublicUsers
+            .Include(p => p.IdentityUser)
             .Where(c => c.PublicUserId == userId);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Playing/Details/5
+        // GET: PublicUser/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,45 +52,44 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
-            var playing = await _context.Playing
-                .Include(p => p.Play)
-                .Include(p => p.PublicUser)
-                .FirstOrDefaultAsync(m => m.PlayingId == id);
-            if (playing == null)
+            var publicUser = await _context.PublicUsers
+                .Include(p => p.IdentityUser)
+                .FirstOrDefaultAsync(m => m.PublicUserId == id);
+            if (publicUser == null)
             {
                 return NotFound();
             }
 
-            return View(playing);
+            return View(publicUser);
         }
 
-        // GET: Playing/Create
+        // GET: PublicUser/Create
         public IActionResult Create()
         {
-            ViewData["PlayId"] = new SelectList(_context.Plays, "PlayId", "PlayId");
-            ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName");
+            string Id = _userManager.GetUserId(User);
+
+            ViewBag.Id = Id;
             return View();
         }
 
-        // POST: Playing/Create
+        // POST: PublicUser/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlayingId,PlayId,Par,GroupNr,PublicUserId")] Playing playing)
+        public async Task<IActionResult> Create([Bind("PublicUserId,DisplayName,PDGA_Nr,PictureURL,Id")] PublicUser publicUser)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(playing);
+                _context.Add(publicUser);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PlayId"] = new SelectList(_context.Plays, "PlayId", "PlayId", playing.PlayId);
-            ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", playing.PublicUserId);
-            return View(playing);
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "Id", publicUser.Id);
+            return View(publicUser);
         }
 
-        // GET: Playing/Edit/5
+        // GET: PublicUser/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,24 +97,23 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
-            var playing = await _context.Playing.FindAsync(id);
-            if (playing == null)
+            var publicUser = await _context.PublicUsers.FindAsync(id);
+            if (publicUser == null)
             {
                 return NotFound();
             }
-            ViewData["PlayId"] = new SelectList(_context.Plays, "PlayId", "PlayId", playing.PlayId);
-            ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", playing.PublicUserId);
-            return View(playing);
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "Id", publicUser.Id);
+            return View(publicUser);
         }
 
-        // POST: Playing/Edit/5
+        // POST: PublicUser/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PlayingId,PlayId,Par,GroupNr,PublicUserId")] Playing playing)
+        public async Task<IActionResult> Edit(int id, [Bind("PublicUserId,DisplayName,PDGA_Nr,PictureURL,Id")] PublicUser publicUser)
         {
-            if (id != playing.PlayingId)
+            if (id != publicUser.PublicUserId)
             {
                 return NotFound();
             }
@@ -124,12 +122,12 @@ namespace discgolf_duels.Controllers
             {
                 try
                 {
-                    _context.Update(playing);
+                    _context.Update(publicUser);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlayingExists(playing.PlayingId))
+                    if (!PublicUserExists(publicUser.PublicUserId))
                     {
                         return NotFound();
                     }
@@ -140,12 +138,11 @@ namespace discgolf_duels.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PlayId"] = new SelectList(_context.Plays, "PlayId", "PlayId", playing.PlayId);
-            ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", playing.PublicUserId);
-            return View(playing);
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "Id", publicUser.Id);
+            return View(publicUser);
         }
 
-        // GET: Playing/Delete/5
+        // GET: PublicUser/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -153,36 +150,35 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
-            var playing = await _context.Playing
-                .Include(p => p.Play)
-                .Include(p => p.PublicUser)
-                .FirstOrDefaultAsync(m => m.PlayingId == id);
-            if (playing == null)
+            var publicUser = await _context.PublicUsers
+                .Include(p => p.IdentityUser)
+                .FirstOrDefaultAsync(m => m.PublicUserId == id);
+            if (publicUser == null)
             {
                 return NotFound();
             }
 
-            return View(playing);
+            return View(publicUser);
         }
 
-        // POST: Playing/Delete/5
+        // POST: PublicUser/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var playing = await _context.Playing.FindAsync(id);
-            if (playing != null)
+            var publicUser = await _context.PublicUsers.FindAsync(id);
+            if (publicUser != null)
             {
-                _context.Playing.Remove(playing);
+                _context.PublicUsers.Remove(publicUser);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PlayingExists(int id)
+        private bool PublicUserExists(int id)
         {
-            return _context.Playing.Any(e => e.PlayingId == id);
+            return _context.PublicUsers.Any(e => e.PublicUserId == id);
         }
     }
 }

@@ -26,21 +26,28 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Course"
-                                asp-action="Index">Banor</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Competition"
-                                asp-action="Index">Tävlingar</a>
+                                asp-action="ListAll">Tävlingar</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Play"
-                                asp-action="Index">Rundor</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
-                                asp-action="Privacy">Privacy</a>
-                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Administrera
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Playing"
+                                        asp-action="Index">Dina
+                                        rundor</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Course"
+                                        asp-action="Index">Banor</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Registration"
+                                        asp-action="Index">Registrerade Tävlingar</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Competition"
+                                        asp-action="Index">Egna Tävlingar</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="PublicUser"
+                                        asp-action="Index">Publik Profil</a></li>
+                            </ul>
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

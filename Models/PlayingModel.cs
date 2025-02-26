@@ -11,16 +11,16 @@ namespace discgolf_duels.Models
         public int PlayingId { get; set; }
 
         [Required]
-        public int PlayId { get; set; }
+        public required int PlayId { get; set; }
         [ForeignKey("PlayId")]
-        public Play Play { get; set; }
+        public required Play Play { get; set; }
 
         public int? Par { get; set; }
         public int? GroupNr { get; set; }
 
         [Required]
-        public string UserId { get; set; }
-        [ForeignKey("UserId")]
-        public ApplicationUser User { get; set; }
+        public required int PublicUserId { get; set; }
+        [ForeignKey("PublicUserId")]
+        public PublicUser? PublicUser { get; set; }
     }
 }

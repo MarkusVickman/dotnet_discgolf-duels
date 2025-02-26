@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Competition)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                @Html.DisplayNameFor(model => model.PublicUser)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RegisterDate)
@@ -28,10 +28,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Competition.UserEmail)
+                @Html.DisplayFor(modelItem => item.Competition.CompetitionId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.PublicUser.DisplayName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RegisterDate)

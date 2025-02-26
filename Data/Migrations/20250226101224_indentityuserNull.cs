@@ -5,7 +5,7 @@
 namespace discgolf_duels.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Competition : Migration
+    public partial class indentityuserNull : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

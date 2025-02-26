@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("discgolf-duels")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+842b2ff3c4c97c37d918db0a70b7ebd93a22fb30")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac7c62a74447e3f1a4aff8c187f5b0a04eea33d9")]
 [assembly: System.Reflection.AssemblyProductAttribute("discgolf-duels")]
 [assembly: System.Reflection.AssemblyTitleAttribute("discgolf-duels")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

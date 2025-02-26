@@ -4,7 +4,7 @@ using discgolf_duels.Models;
 
 namespace discgolf_duels.Data;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -20,6 +20,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Playing> Playing { get; set; }
 
     public DbSet<Registration> Registrations { get; set; }
+
+    public DbSet<PublicUser> PublicUsers { get; set; }
 
     //public DbSet<Friend> Friends { get; set; }
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using discgolf_duels.Data;
 
@@ -10,9 +11,11 @@ using discgolf_duels.Data;
 namespace discgolf_duels.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250226092038_AddedPublicUser")]
+    partial class AddedPublicUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
@@ -219,11 +222,7 @@ namespace discgolf_duels.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CompetitionDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CompetitionName")
-                        .IsRequired()
+                    b.Property<DateTime?>("CompetitionDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("MaxPlayerCount")
@@ -320,7 +319,8 @@ namespace discgolf_duels.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Id")
+                    b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("PDGA_Nr")
@@ -332,7 +332,7 @@ namespace discgolf_duels.Data.Migrations
 
                     b.HasKey("PublicUserId");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("Email");
 
                     b.ToTable("PublicUsers");
                 });
@@ -463,7 +463,9 @@ namespace discgolf_duels.Data.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("Id");
+                        .HasForeignKey("Email")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("IdentityUser");
                 });

@@ -11,14 +11,14 @@ public class Play
 
     public int? CompetitionId { get; set; }
     [ForeignKey("CompetitionId")]
-    public Competition Competition { get; set; }
+    public Competition? Competition { get; set; }
 
     [Required]
-    public int CourseId { get; set; }
+    public required int CourseId { get; set; }
     [ForeignKey("CourseId")]
-    public Course Course { get; set; }
+    public Course? Course { get; set; }
 
-    public bool Active { get; set; }
+    public bool Active { get; set; } = false;
 }
 
 }

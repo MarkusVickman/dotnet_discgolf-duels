@@ -11,8 +11,8 @@ using discgolf_duels.Data;
 namespace discgolf_duels.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250225113349_Competition")]
-    partial class Competition
+    [Migration("20250226090549_ChangeUserTable")]
+    partial class ChangeUserTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -216,6 +216,151 @@ namespace discgolf_duels.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("discgolf_duels.Models.Competition", b =>
+                {
+                    b.Property<int>("CompetitionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("CompetitionDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MaxPlayerCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PublicUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CompetitionId");
+
+                    b.HasIndex("PublicUserId");
+
+                    b.ToTable("Competitions");
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.Course", b =>
+                {
+                    b.Property<int>("CourseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CourseName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Par")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CourseId");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.Play", b =>
+                {
+                    b.Property<int>("PlayId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CompetitionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("PlayId");
+
+                    b.HasIndex("CompetitionId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Plays");
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.Playing", b =>
+                {
+                    b.Property<int>("PlayingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("GroupNr")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Par")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PlayId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PublicUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("PlayingId");
+
+                    b.HasIndex("PlayId");
+
+                    b.HasIndex("PublicUserId");
+
+                    b.ToTable("Playing");
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.PublicUser", b =>
+                {
+                    b.Property<int>("PublicUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("PDGA_Nr")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PictureURL")
+                        .HasMaxLength(300)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("PublicUserId");
+
+                    b.HasIndex("Email");
+
+                    b.ToTable("PublicUser");
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.Registration", b =>
+                {
+                    b.Property<int>("RegistrationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CompetitionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PublicUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("RegisterDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("RegistrationId");
+
+                    b.HasIndex("CompetitionId");
+
+                    b.HasIndex("PublicUserId");
+
+                    b.ToTable("Registrations");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -265,6 +410,88 @@ namespace discgolf_duels.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.Competition", b =>
+                {
+                    b.HasOne("discgolf_duels.Models.PublicUser", "PublicUser")
+                        .WithMany()
+                        .HasForeignKey("PublicUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PublicUser");
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.Play", b =>
+                {
+                    b.HasOne("discgolf_duels.Models.Competition", "Competition")
+                        .WithMany()
+                        .HasForeignKey("CompetitionId");
+
+                    b.HasOne("discgolf_duels.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Competition");
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.Playing", b =>
+                {
+                    b.HasOne("discgolf_duels.Models.Play", "Play")
+                        .WithMany()
+                        .HasForeignKey("PlayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("discgolf_duels.Models.PublicUser", "PublicUser")
+                        .WithMany()
+                        .HasForeignKey("PublicUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Play");
+
+                    b.Navigation("PublicUser");
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.PublicUser", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("Email")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("IdentityUser");
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.Registration", b =>
+                {
+                    b.HasOne("discgolf_duels.Models.Competition", "Competition")
+                        .WithMany("Registrations")
+                        .HasForeignKey("CompetitionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("discgolf_duels.Models.PublicUser", "PublicUser")
+                        .WithMany()
+                        .HasForeignKey("PublicUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Competition");
+
+                    b.Navigation("PublicUser");
+                });
+
+            modelBuilder.Entity("discgolf_duels.Models.Competition", b =>
+                {
+                    b.Navigation("Registrations");
                 });
 #pragma warning restore 612, 618
         }

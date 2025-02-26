@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using discgolf_duels.Data;
 
@@ -10,9 +11,11 @@ using discgolf_duels.Data;
 namespace discgolf_duels.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250226101224_indentityuserNull")]
+    partial class indentityuserNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
@@ -219,11 +222,7 @@ namespace discgolf_duels.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CompetitionDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CompetitionName")
-                        .IsRequired()
+                    b.Property<DateTime?>("CompetitionDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("MaxPlayerCount")

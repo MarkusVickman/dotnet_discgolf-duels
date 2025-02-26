@@ -12,12 +12,12 @@ namespace discgolf_duels.Models
         [Required]
         public int CompetitionId { get; set; }
         [ForeignKey("CompetitionId")]
-        public Competition Competition { get; set; }
+        public Competition? Competition { get; set; }
 
         [Required]
-        public string UserId { get; set; }
-        [ForeignKey("UserId")]
-        public ApplicationUser User { get; set; }
+        public required int PublicUserId { get; set; }
+        [ForeignKey("PublicUserId")]
+        public PublicUser? PublicUser { get; set; }
 
         public DateTime RegisterDate { get; set; } = DateTime.Now; // Registreringsdatum
     }

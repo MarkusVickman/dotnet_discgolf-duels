@@ -14,6 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CompetitionId" />
             <div class="form-group">
+                <label asp-for="CompetitionName" class="control-label"></label>
+                <input asp-for="CompetitionName" class="form-control" />
+                <span asp-validation-for="CompetitionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="CompetitionDate" class="control-label"></label>
                 <input asp-for="CompetitionDate" class="form-control" />
                 <span asp-validation-for="CompetitionDate" class="text-danger"></span>
@@ -24,9 +29,9 @@
                 <span asp-validation-for="MaxPlayerCount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserEmail" class="control-label"></label>
-                <select asp-for="UserEmail" class="form-control" asp-items="ViewBag.UserEmail"></select>
-                <span asp-validation-for="UserEmail" class="text-danger"></span>
+                <label asp-for="PublicUserId" class="control-label"></label>
+                <select asp-for="PublicUserId" class="form-control" asp-items="ViewBag.PublicUserId"></select>
+                <span asp-validation-for="PublicUserId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -7,22 +7,49 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using discgolf_duels.Data;
 using discgolf_duels.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace discgolf_duels.Controllers
 {
     public class CompetitionController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public CompetitionController(ApplicationDbContext context)
+        public CompetitionController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Competition
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Competitions.Include(c => c.User);
+            string Id = _userManager.GetUserId(User);
+            var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+
+            if (thisPublicUser == null)
+            {
+                // Hantera fallet där PublicUser inte hittas
+                // Om PublicUser inte hittas, gör en redirect till PublicUser/Create
+                return RedirectToAction("Create", "PublicUser");
+            }
+
+            int userId = thisPublicUser.PublicUserId;
+
+            var applicationDbContext = _context.Competitions
+            .Include(c => c.PublicUser)
+            .Where(c => c.PublicUserId == userId);
+
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+         // GET: Competition
+        public async Task<IActionResult> ListAll()
+        {        
+            var applicationDbContext = _context.Competitions
+            .Include(c => c.PublicUser);
+
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +62,7 @@ namespace discgolf_duels.Controllers
             }
 
             var competition = await _context.Competitions
-                .Include(c => c.User)
+                .Include(c => c.PublicUser)
                 .FirstOrDefaultAsync(m => m.CompetitionId == id);
             if (competition == null)
             {
@@ -48,7 +75,7 @@ namespace discgolf_duels.Controllers
         // GET: Competition/Create
         public IActionResult Create()
         {
-            ViewData["UserEmail"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName");
             return View();
         }
 
@@ -57,7 +84,7 @@ namespace discgolf_duels.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CompetitionId,CompetitionDate,MaxPlayerCount,UserEmail")] Competition competition)
+        public async Task<IActionResult> Create([Bind("CompetitionId,CompetitionName,CompetitionDate,MaxPlayerCount,PublicUserId")] Competition competition)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +92,7 @@ namespace discgolf_duels.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserEmail"] = new SelectList(_context.Users, "Id", "Id", competition.UserEmail);
+            ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", competition.PublicUserId);
             return View(competition);
         }
 
@@ -82,7 +109,7 @@ namespace discgolf_duels.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserEmail"] = new SelectList(_context.Users, "Id", "Id", competition.UserEmail);
+            ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", competition.PublicUserId);
             return View(competition);
         }
 
@@ -91,7 +118,7 @@ namespace discgolf_duels.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CompetitionId,CompetitionDate,MaxPlayerCount,UserEmail")] Competition competition)
+        public async Task<IActionResult> Edit(int id, [Bind("CompetitionId,CompetitionName,CompetitionDate,MaxPlayerCount,PublicUserId")] Competition competition)
         {
             if (id != competition.CompetitionId)
             {
@@ -118,7 +145,7 @@ namespace discgolf_duels.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserEmail"] = new SelectList(_context.Users, "Id", "Id", competition.UserEmail);
+            ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", competition.PublicUserId);
             return View(competition);
         }
 
@@ -131,7 +158,7 @@ namespace discgolf_duels.Controllers
             }
 
             var competition = await _context.Competitions
-                .Include(c => c.User)
+                .Include(c => c.PublicUser)
                 .FirstOrDefaultAsync(m => m.CompetitionId == id);
             if (competition == null)
             {

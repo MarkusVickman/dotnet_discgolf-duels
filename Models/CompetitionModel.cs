@@ -8,19 +8,26 @@ namespace discgolf_duels.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CompetitionId { get; set; }
-
-        public DateTime? CompetitionDate { get; set; }
+        [Required]
+        public required String CompetitionName { get; set; }
 
         [Required]
-        public int MaxPlayerCount { get; set; }
+        public required int CourseId { get; set; }
+        [ForeignKey("CourseId")]
+        public Course? Course { get; set; }
 
         [Required]
-        [StringLength(150)]
-        public string UserEmail { get; set; } // Ändra typen till string och använd Email som främmande nyckel
-        [ForeignKey("UserEmail")]
-        public ApplicationUser User { get; set; }
+        public required DateTime CompetitionDate { get; set; }
+
+        [Required]
+        public required int MaxPlayerCount { get; set; }
+
+        [Required]
+        public required int PublicUserId { get; set; }
+        [ForeignKey("PublicUserId")]
+        public PublicUser? PublicUser { get; set; }
 
         // Ny lista för att hantera registreringar
-        public ICollection<Registration> Registrations { get; set; }
+        public ICollection<Registration>? Registrations { get; set; }
     }
 }

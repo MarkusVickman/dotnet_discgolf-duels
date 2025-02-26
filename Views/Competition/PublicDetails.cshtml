@@ -1,4 +1,4 @@
-@model discgolf_duels.Models.Playing
+@model discgolf_duels.Models.Competition
 
 @{
     ViewData["Title"] = "Details";
@@ -7,26 +7,26 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Playing</h4>
+    <h4>Competition</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Play)
+            @Html.DisplayNameFor(model => model.CompetitionName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Play.PlayId)
+            @Html.DisplayFor(model => model.CompetitionName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Par)
+            @Html.DisplayNameFor(model => model.CompetitionDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Par)
+            @Html.DisplayFor(model => model.CompetitionDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GroupNr)
+            @Html.DisplayNameFor(model => model.MaxPlayerCount)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GroupNr)
+            @Html.DisplayFor(model => model.MaxPlayerCount)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PublicUser)
@@ -37,6 +37,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.PlayingId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.CompetitionId">Play</a> |
+        <a asp-controller="Registration" asp-action="Create" asp-route-id="@Model?.CompetitionId">Registrera</a> |
     <a asp-action="Index">Back to List</a>
 </div>
