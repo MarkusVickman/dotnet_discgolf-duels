@@ -60,6 +60,17 @@ namespace discgolf_duels.Controllers
             {
                 _context.Add(course);
                 await _context.SaveChangesAsync();
+
+                var thisCourse = await _context.Courses.FirstOrDefaultAsync(c => c.CourseName == course.CourseName);
+
+                Play play = new Play
+                {
+                    CourseId = thisCourse.CourseId
+                };
+
+                _context.Plays.Add(play);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(course);

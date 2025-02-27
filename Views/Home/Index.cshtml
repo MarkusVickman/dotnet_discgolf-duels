@@ -7,6 +7,19 @@
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
     <h2>Starta runda</h2>
-    <a type="button" class="btn btn-primary btn-lg" asp-area="" asp-controller="Play" asp-action="Index">Spela</a>
-
-</div>
+    <h4>Play</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="Play" asp-action="CreateSingle">
+                <div class="form-group">
+                    <label for="PlayId" class="control-label"></label>
+                    <select id="PlayId" name="PlayId"a class="form-control" asp-items="ViewBag.PlayId"></select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>

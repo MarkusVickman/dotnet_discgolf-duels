@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using discgolf_duels.Data;
 using discgolf_duels.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace discgolf_duels.Controllers
 {
     public class PlayController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public PlayController(ApplicationDbContext context)
+        public PlayController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Play
@@ -46,7 +49,7 @@ namespace discgolf_duels.Controllers
             return View(play);
         }
 
-        // GET: Play/Create
+        // GET: Play/Create Competition
         public async Task<IActionResult> Create(int id)
         {
             if (id != 0)
@@ -59,7 +62,7 @@ namespace discgolf_duels.Controllers
                 .Where(r => r.CompetitionId == id)
                 .ToListAsync();
 
-                var course = _context.Courses.FirstOrDefault(c => c.CourseId == competition.CourseId);
+                var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == competition.CourseId);
 
                 Play play = new Play
                 {
@@ -89,13 +92,35 @@ namespace discgolf_duels.Controllers
 
                 return RedirectToAction("index", "Playing");
             }
+            return View();
 
-            else
+        }
+
+        // GET: Play/Create
+        public async Task<IActionResult> CreateSingle(int playId)
+        {
+            if (playId != 0)
             {
-                ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId");
-                ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName");
+                var play = await _context.Plays.FirstOrDefaultAsync(c => c.PlayId == playId && (c.CompetitionId == null || c.CompetitionId == 0));
+                var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == play.CourseId);
+
+                string Id = _userManager.GetUserId(User);
+                var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+
+                Playing playing = new Playing
+                {
+                    PlayId = play.PlayId,
+                    Par = course?.Par,
+                    GroupNr = null,
+                    PublicUserId = thisPublicUser.PublicUserId
+                };
+
+                _context.Playing.Add(playing);
+                await _context.SaveChangesAsync();
+
             }
-                return RedirectToAction("index", "Playing");
+            return RedirectToAction("index", "Playing");
+
         }
 
         // POST: Play/Create
@@ -109,7 +134,26 @@ namespace discgolf_duels.Controllers
             {
                 _context.Add(play);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                var findPlay = await _context.Plays.FirstOrDefaultAsync(p => p.CourseId == play.CourseId && p.CompetitionId == null);
+
+                var course = await _context.Courses.FirstOrDefaultAsync(p => p.CourseId == play.CourseId);
+
+                string Id = _userManager.GetUserId(User);
+                var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+
+                Playing playing = new Playing
+                {
+                    PlayId = findPlay.PlayId,
+                    Par = course?.Par,
+                    GroupNr = null,
+                    PublicUserId = thisPublicUser.PublicUserId
+                };
+
+                _context.Playing.Add(playing);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("index", "Playing");
             }
             ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId", play.CompetitionId);
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", play.CourseId);
