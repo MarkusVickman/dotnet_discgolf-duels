@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "Details";
+
+    var registrations = ViewBag.Registrations as List<Registration>;
+    var playings = ViewBag.Playings as List<Playing>;
 }
 
 <h1>Details</h1>
@@ -43,7 +46,85 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Play" asp-route-id="@Model?.CompetitionId">Starta Tävling</a> |
+    <a asp-controller="Play" asp-action="create" asp-route-id="@Model?.CompetitionId">Starta Tävling</a> |
     <a asp-action="Edit" asp-route-id="@Model?.CompetitionId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+<br>
+<br>
+@if (registrations != null)
+{
+     <div>
+            <h4>Registrations</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            User
+                        </th>
+                        <th>
+                            Registration date
+                        </th>
+                    </tr>
+                </thead>       
+                <tbody>
+    @foreach (var registration in registrations)
+    {
+                        <tr>
+                            <td>
+                                @registration.PublicUser.DisplayName
+                            </td>
+                            <td>
+                                @registration.RegisterDate
+                            </td>
+                            <td>
+                                <a asp-controller="Registration" asp-action="Delete" asp-route-id="@registration.RegistrationId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>            
+        </div>
+    }
+    <br>
+<br>
+@if (playings != null)
+{
+     <div>
+            <h4>Standings</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            User
+                        </th>
+                        <th>
+                            Par
+                        </th>
+                    </tr>
+                </thead>       
+                <tbody>
+    @foreach (var playing in playings)
+    {
+                        <tr>
+                            <td>
+                                @playing.PublicUser.DisplayName
+                            </td>
+                            <td>
+                                @playing.Par
+                            </td>
+                            <td>
+                                @playing.GroupNr
+                            </td>
+                            <td>
+                <a asp-controller="Playing" asp-action="Edit" asp-route-id="@playing.PlayingId">Edit</a> |
+                <a asp-controller="Playing" asp-action="Details" asp-route-id="@playing.PlayingId">Details</a> |
+                <a asp-controller="Playing" asp-action="Delete" asp-route-id="@playing.PlayingId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>            
+        </div>
+        }
+

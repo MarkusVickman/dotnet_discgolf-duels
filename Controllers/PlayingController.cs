@@ -190,6 +190,18 @@ namespace discgolf_duels.Controllers
             if (playing != null)
             {
                 _context.Playing.Remove(playing);
+                await _context.SaveChangesAsync();
+
+                bool playEmpty = !await _context.Playing.AnyAsync(p => p.PlayId == playing.PlayId);
+
+                if (playEmpty)
+                {
+                    var play = await _context.Plays.FindAsync(playing.PlayId);
+                    if (play != null)
+                    {
+                        _context.Plays.Remove(play);
+                    }
+                }
             }
 
             await _context.SaveChangesAsync();

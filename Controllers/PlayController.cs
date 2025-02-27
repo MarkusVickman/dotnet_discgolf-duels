@@ -84,7 +84,10 @@ namespace discgolf_duels.Controllers
                     };
 
                     _context.Playing.Add(playing);
+                    await _context.SaveChangesAsync();
                 }
+
+                return RedirectToAction("index", "Playing");
             }
 
             else
@@ -92,7 +95,7 @@ namespace discgolf_duels.Controllers
                 ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId");
                 ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName");
             }
-            return View();
+                return RedirectToAction("index", "Playing");
         }
 
         // POST: Play/Create

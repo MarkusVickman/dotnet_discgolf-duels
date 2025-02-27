@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "Details";
+
+        var registrations = ViewBag.Registrations as List<Registration>;
+        var playings = ViewBag.Playings as List<Playing>;
 }
 
 <h1>Details</h1>
@@ -43,7 +46,76 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.CompetitionId">Play</a> |
     <a asp-controller="Registration" asp-action="Create" asp-route-id="@Model?.CompetitionId">Registrera</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Competition" asp-action="Index">Back to List</a>
 </div>
+<br>
+<br>
+@if (registrations != null)
+{
+     <div>
+            <h4>Registrations</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            User
+                        </th>
+                        <th>
+                            Registration date
+                        </th>
+                    </tr>
+                </thead>       
+                <tbody>
+    @foreach (var registration in registrations)
+    {
+                        <tr>
+                            <td>
+                                @registration.PublicUser.DisplayName
+                            </td>
+                            <td>
+                                @registration.RegisterDate
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>            
+        </div>
+    }
+    <br>
+<br>
+@if (playings != null)
+{
+     <div>
+            <h4>Standings</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            User
+                        </th>
+                        <th>
+                            Par
+                        </th>
+                    </tr>
+                </thead>       
+                <tbody>
+    @foreach (var playing in playings)
+    {
+                        <tr>
+                            <td>
+                                @playing.PublicUser.DisplayName
+                            </td>
+                            <td>
+                                @playing.Par
+                            </td>
+                            <td>
+                                @playing.GroupNr
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>            
+        </div>
+        }
+

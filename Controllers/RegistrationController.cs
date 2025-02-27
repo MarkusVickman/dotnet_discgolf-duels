@@ -78,6 +78,17 @@ namespace discgolf_duels.Controllers
             }
 
             var Competition = await _context.Competitions.FirstOrDefaultAsync(p => p.CompetitionId == id);
+
+            var exists = await _context.Registrations.AnyAsync(p => p.CompetitionId == id && p.PublicUserId == thisPublicUser.PublicUserId);
+
+            var count = await _context.Registrations
+            .Where(p => p.CompetitionId == id)
+            .CountAsync();
+
+            if(Competition.MaxPlayerCount <= count || exists)
+            {
+                return RedirectToAction("ListAll", "Competition");
+            }
             
             ViewBag.Competition = Competition;
             ViewBag.PublicUserId = thisPublicUser.PublicUserId;

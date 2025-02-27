@@ -64,6 +64,29 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
+            ViewBag.Registrations = await _context.Registrations
+            .Include(r => r.Competition)
+            .Include(r => r.PublicUser)
+            .Where(r => r.CompetitionId == id)
+            .ToListAsync();
+
+            var plays = await _context.Plays
+            .FirstOrDefaultAsync(r => r.CompetitionId == id);
+
+            if (plays != null)
+            {
+
+                var playings = await _context.Playing
+                .Include(p => p.Play)
+                .Include(p => p.PublicUser)
+                .Where(r => r.PlayId == plays.PlayId)
+                .ToListAsync();
+
+                // Sätt playings i ViewBag
+                ViewBag.Playings = playings;
+
+            }
+
             var competition = await _context.Competitions
                 .Include(c => c.Course)
                 .Include(c => c.PublicUser)
@@ -74,6 +97,61 @@ namespace discgolf_duels.Controllers
             }
 
             return View(competition);
+        }
+
+        // GET: Competition/Details/5
+        public async Task<IActionResult> PublicDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Registations = await _context.Registrations
+            .Include(r => r.Competition)
+            .Include(r => r.PublicUser)
+            .Where(r => r.CompetitionId == id)
+            .ToListAsync();
+
+            ViewBag.Registrations = await _context.Registrations
+         .Include(r => r.Competition)
+         .Include(r => r.PublicUser)
+         .Where(r => r.CompetitionId == id)
+         .ToListAsync();
+
+            var plays = await _context.Plays
+            .FirstOrDefaultAsync(r => r.CompetitionId == id);
+
+            if (plays != null)
+            {
+
+                var playings = await _context.Playing
+                .Include(p => p.Play)
+                .Include(p => p.PublicUser)
+                .Where(r => r.PlayId == plays.PlayId)
+                .ToListAsync();
+
+
+
+                // Sätt playings i ViewBag
+                ViewBag.Playings = playings;
+
+            }
+
+            var competition = await _context.Competitions
+                .Include(c => c.Course)
+                .Include(c => c.PublicUser)
+                .FirstOrDefaultAsync(m => m.CompetitionId == id);
+
+
+            if (competition == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(competition);
+
         }
 
         // GET: Competition/Create
