@@ -2,6 +2,15 @@
 
 @{
     ViewData["Title"] = "Edit";
+    String par = Model.Par;
+
+    int[] parArray = new int[par.Length];
+
+    for (int i = 0; i < par.Length; i++)
+    {
+        parArray[i] = int.Parse(par[i].ToString());
+    }
+
 }
 
 <h1>Edit</h1>
@@ -43,7 +52,41 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<br><br>
+
+
+
+<div class="card">
+    <div class="card-header">
+        Score Card
+    </div>
+    <div class="card-body">
+        @for (int i = 0; i < parArray.Length; i++)
+        {
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Korg</label>
+                <div class="col-sm-10">
+                    <input type="number" readonly class="form-control-plaintext" id="staticEmail" value="@(i+1)">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Kast</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputPassword" value="@parArray[i]">
+                </div>
+            </div>
+        }
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Prev</button>
+        <button type="button" class="btn btn-primary">Next</button>
+    </div>
+</div>
+
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
