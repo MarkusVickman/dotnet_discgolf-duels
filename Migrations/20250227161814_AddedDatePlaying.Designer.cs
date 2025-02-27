@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using discgolf_duels.Data;
 
@@ -10,9 +11,11 @@ using discgolf_duels.Data;
 namespace discgolf_duels.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250227161814_AddedDatePlaying")]
+    partial class AddedDatePlaying
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
@@ -255,9 +258,8 @@ namespace discgolf_duels.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Par")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Par")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("CourseId");
 
@@ -297,8 +299,8 @@ namespace discgolf_duels.Migrations
                     b.Property<int?>("GroupNr")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Par")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("Par")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("PlayId")
                         .HasColumnType("INTEGER");

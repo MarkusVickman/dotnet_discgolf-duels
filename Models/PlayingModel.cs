@@ -15,12 +15,13 @@ namespace discgolf_duels.Models
         [ForeignKey("PlayId")]
         public Play? Play { get; set; }
 
-        public int? Par { get; set; }
+        public string? Par { get; set; }
         public int? GroupNr { get; set; }
 
         [Required]
         public required int PublicUserId { get; set; }
         [ForeignKey("PublicUserId")]
         public PublicUser? PublicUser { get; set; }
+        public DateTime RegisterDate { get; set; } = DateTime.Now; // Registreringsdatum
     }
 }

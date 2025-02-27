@@ -107,6 +107,7 @@ namespace discgolf_duels.Controllers
                 string Id = _userManager.GetUserId(User);
                 var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
+
                 Playing playing = new Playing
                 {
                     PlayId = play.PlayId,
@@ -118,8 +119,14 @@ namespace discgolf_duels.Controllers
                 _context.Playing.Add(playing);
                 await _context.SaveChangesAsync();
 
+                var thisPlaying = await _context.Playing
+                .Where(p => p.PublicUserId == thisPublicUser.PublicUserId)
+                .OrderByDescending(p => p.RegisterDate)
+                .FirstOrDefaultAsync();
+                 return RedirectToAction("Edit", "Playing", new { id = thisPlaying.PlayingId });
+
             }
-            return RedirectToAction("index", "Playing");
+            return RedirectToAction("index", "Home");
 
         }
 

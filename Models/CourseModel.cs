@@ -11,7 +11,7 @@ namespace discgolf_duels.Models
         public int CourseId { get; set; }
 
         [Required]
-        public int Par { get; set; }
+        public required string Par { get; set; }
 
         [Required]
         [StringLength(150)]

@@ -192,7 +192,10 @@ namespace discgolf_duels.Controllers
                 _context.Playing.Remove(playing);
                 await _context.SaveChangesAsync();
 
-                bool playEmpty = !await _context.Playing.AnyAsync(p => p.PlayId == playing.PlayId);
+
+
+                //kod för att ta bort play om ingen playing är aktiv. Kanske är onödig då jag instället gjort play knytna till banor
+               /* bool playEmpty = !await _context.Playing.AnyAsync(p => p.PlayId == playing.PlayId);
 
                 if (playEmpty)
                 {
@@ -201,7 +204,7 @@ namespace discgolf_duels.Controllers
                     {
                         _context.Plays.Remove(play);
                     }
-                }
+                }*/
             }
 
             await _context.SaveChangesAsync();
