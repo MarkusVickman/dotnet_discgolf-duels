@@ -32,8 +32,7 @@
                 <span asp-validation-for="MaxPlayerCount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PublicUserId" class="control-label"></label>
-                <select asp-for="PublicUserId" class="form-control" asp-items="ViewBag.PublicUserId"></select>
+                <input asp-for="PublicUserId" type="hidden" class="form-control" value="@ViewBag.PublicUserId"/>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -1,4 +1,6 @@
 @model discgolf_duels.Models.Competition
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Details";
@@ -46,8 +48,10 @@
     </dl>
 </div>
 <div>
-    <a asp-controller="Registration" asp-action="Create" asp-route-id="@Model?.CompetitionId">Registrera</a> |
-    <a asp-controller="Competition" asp-action="Index">Back to List</a>
+                        @if (SignInManager.IsSignedIn(User))
+                    {
+    <a asp-controller="Registration" asp-action="Create" asp-route-id="@Model?.CompetitionId">Register</a>} |
+    <a asp-controller="Competition" asp-action="ListAll">Back to List</a>
 </div>
 <br>
 <br>

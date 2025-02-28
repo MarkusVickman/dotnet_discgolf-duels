@@ -1,14 +1,12 @@
 @model IEnumerable<discgolf_duels.Models.PublicUser>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Public profile";
 }
 
-<h1>Index</h1>
+<h1>Public profile</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -18,13 +16,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.PDGA_Nr)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PictureURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -35,12 +26,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PDGA_Nr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PictureURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PublicUserId">Edit</a> |

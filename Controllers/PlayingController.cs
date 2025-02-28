@@ -37,10 +37,13 @@ namespace discgolf_duels.Controllers
 
             int userId = thisPublicUser.PublicUserId;
 
+
             var applicationDbContext = _context.Playing
             .Include(p => p.Play)
+            .ThenInclude(p => p.Course)
             .Include(p => p.PublicUser)
-            .Where(c => c.PublicUserId == userId);
+            .Where(c => c.PublicUserId == userId && (c.Play.CompetitionId == null || c.Play.CompetitionId == 0));
+
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -114,13 +117,27 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
+            string Id = _userManager.GetUserId(User);
+            var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+
             var playing = await _context.Playing.FindAsync(id);
             if (playing == null)
             {
                 return NotFound();
             }
-            ViewData["PlayId"] = new SelectList(_context.Plays, "PlayId", "PlayId", playing.PlayId);
-            ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", playing.PublicUserId);
+
+            var play = await _context.Plays
+                .Where(c => c.PlayId == playing.PlayId)
+                .FirstOrDefaultAsync();
+
+            ViewBag.PublicUserId = playing.PublicUserId;
+            ViewBag.PlayId = playing.PlayId;
+
+            if (play.CompetitionId != null && play.CompetitionId != 0)
+            {
+                return View("EditGroup", playing);
+            }
+
             return View(playing);
         }
 
@@ -195,16 +212,16 @@ namespace discgolf_duels.Controllers
 
 
                 //kod för att ta bort play om ingen playing är aktiv. Kanske är onödig då jag instället gjort play knytna till banor
-               /* bool playEmpty = !await _context.Playing.AnyAsync(p => p.PlayId == playing.PlayId);
+                /* bool playEmpty = !await _context.Playing.AnyAsync(p => p.PlayId == playing.PlayId);
 
-                if (playEmpty)
-                {
-                    var play = await _context.Plays.FindAsync(playing.PlayId);
-                    if (play != null)
-                    {
-                        _context.Plays.Remove(play);
-                    }
-                }*/
+                 if (playEmpty)
+                 {
+                     var play = await _context.Plays.FindAsync(playing.PlayId);
+                     if (play != null)
+                     {
+                         _context.Plays.Remove(play);
+                     }
+                 }*/
             }
 
             await _context.SaveChangesAsync();

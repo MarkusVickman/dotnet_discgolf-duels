@@ -25,6 +25,8 @@ namespace discgolf_duels.Controllers
         // GET: Registration
         public async Task<IActionResult> Index()
         {
+           
+
             string Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 

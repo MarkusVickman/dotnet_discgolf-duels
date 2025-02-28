@@ -13,6 +13,7 @@ namespace discgolf_duels.Models
         [Required]
         public required string Par { get; set; }
 
+        [Display(Name = "Course")]
         [Required]
         [StringLength(150)]
         public required string CourseName { get; set; }

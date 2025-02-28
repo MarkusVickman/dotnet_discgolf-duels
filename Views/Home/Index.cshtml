@@ -1,25 +1,81 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<discgolf_duels.Models.Playing>
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
     ViewData["Title"] = "Home Page";
+
+
+    @functions {
+    public int SumOfDigits(string str)
+    {
+        return str.Where(char.IsDigit).Sum(c => c - '0');
+    }
+}
 }
 
 <div class="text-center">
     <h1 class="display-4">Disc golf Duels</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-    <h2>Starta runda</h2>
-    <h4>Play</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-controller="Play" asp-action="CreateSingle">
-                <div class="form-group">
-                    <label for="PlayId" class="control-label"></label>
-                    <select id="PlayId" name="PlayId"a class="form-control" asp-items="ViewBag.PlayId"></select>
-                </div>
-                <br>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
+        <hr />
+@if (SignInManager.IsSignedIn(User))
+{
+    
+        <h2>Play course</h2>
+        <div class=" row justify-content-center">
+            <div class="col-md-4">
+                <form asp-controller="Play" asp-action="CreateSingle">
+                    <div class="form-group">
+                        <label for="PlayId" class="control-label"></label>
+                        <select id="PlayId" name="PlayId" a class="form-control" asp-items="ViewBag.PlayId"></select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
+        }
+
+
+
+<div class="mt-5">
+        <h2>All played rounds</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PublicUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegisterDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Par)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Play.Course)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublicUser.DisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegisterDate)
+            </td>
+            <td>
+                @SumOfDigits(item.Par)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Play.Course.CourseName)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

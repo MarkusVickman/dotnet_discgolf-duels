@@ -1,10 +1,10 @@
 @model IEnumerable<discgolf_duels.Models.Competition>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Your Competitions";
 }
 
-<h1>Index</h1>
+<h1>Your Competitions</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -24,10 +24,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.MaxPlayerCount)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublicUser)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -44,9 +40,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MaxPlayerCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublicUser.DisplayName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CompetitionId">Edit</a> |

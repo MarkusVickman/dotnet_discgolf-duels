@@ -1,10 +1,12 @@
+@using Microsoft.AspNetCore.Identity
 @model IEnumerable<discgolf_duels.Models.Competition>
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Competitions";
 }
 
-<h1>Alla tävlingar</h1>
+<h1>All competitions</h1>
 
 <table class="table">
     <thead>
@@ -47,10 +49,13 @@
                     @Html.DisplayFor(modelItem => item.PublicUser.DisplayName)
                 </td>
                 <td>
-                    <a asp-controller="Registration" asp-action="Create" asp-route-id="@item.CompetitionId">Registrera</a> |
-                    <a asp-action="PublicDetails" asp-route-id="@item.CompetitionId">Details</a>
-                </td>
-            </tr>
-        }
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-controller="Registration" asp-action="Create" asp-route-id="@item.CompetitionId">Register</a>
+                    } |
+                <a asp-action="PublicDetails" asp-route-id="@item.CompetitionId">Details</a>
+            </td>
+        </tr>
+                }
     </tbody>
 </table>

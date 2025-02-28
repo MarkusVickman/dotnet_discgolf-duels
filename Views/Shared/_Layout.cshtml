@@ -1,10 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - discgolf_duels</title>
+    <title>@ViewData["Title"] - discgolf duels</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -15,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">discgolf_duels</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">discgolf duels</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -27,26 +30,30 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Competition"
-                                asp-action="ListAll">Tävlingar</a>
+                                asp-action="ListAll">Competitions</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Administrera
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Playing"
-                                        asp-action="Index">Dina
-                                        rundor</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Course"
-                                        asp-action="Index">Banor</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Registration"
-                                        asp-action="Index">Registrerade Tävlingar</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Competition"
-                                        asp-action="Index">Egna Tävlingar</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="PublicUser"
-                                        asp-action="Index">Publik Profil</a></li>
-                            </ul>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Admin
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Playing"
+                                            asp-action="Index">Your rounds</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Course"
+                                            asp-action="Index">Courses</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Registration"
+                                            asp-action="Index">Registered Competitions</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Competition"
+                                            asp-action="Index">Hosted Competitions</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="PublicUser"
+                                            asp-action="Index">Public Profile</a></li>
+                                </ul>
+                            </li>
+                        }
 
                     </ul>
                     <partial name="_LoginPartial" />
@@ -62,7 +69,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - discgolf_duels - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - discgolf duels - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

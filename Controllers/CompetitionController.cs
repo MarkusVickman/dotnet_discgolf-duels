@@ -155,10 +155,14 @@ namespace discgolf_duels.Controllers
         }
 
         // GET: Competition/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            string Id = _userManager.GetUserId(User);
+            var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+
+
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName");
-            ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName");
+            ViewBag.PublicUserId = thisPublicUser.PublicUserId;
             return View();
         }
 

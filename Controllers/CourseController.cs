@@ -7,21 +7,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using discgolf_duels.Data;
 using discgolf_duels.Models;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace discgolf_duels.Controllers
 {
     public class CourseController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public CourseController(ApplicationDbContext context)
+        public CourseController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Course
         public async Task<IActionResult> Index()
         {
+            string Id = _userManager.GetUserId(User);
+            var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+
+            if (thisPublicUser == null)
+            {
+                // Hantera fallet där PublicUser inte hittas
+                // Om PublicUser inte hittas, gör en redirect till PublicUser/Create
+                return RedirectToAction("Create", "PublicUser");
+            }
+
+
+
             return View(await _context.Courses.ToListAsync());
         }
 

@@ -1,10 +1,18 @@
 @model IEnumerable<discgolf_duels.Models.Playing>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Rounds";
+
+
+@functions {
+    public int SumOfDigits(string str)
+    {
+        return str.Where(char.IsDigit).Sum(c => c - '0');
+    }
+}
 }
 
-<h1>Index</h1>
+<h1>Your rounds</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,41 +21,36 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Play)
+                @Html.DisplayNameFor(model => model.RegisterDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Par)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GroupNr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublicUser)
+                @Html.DisplayNameFor(model => model.Play.Course)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Play.PlayId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Par)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroupNr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublicUser.DisplayName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PlayingId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PlayingId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PlayingId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegisterDate)
+                </td>
+                <td>
+                    @SumOfDigits(item.Par)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Play.Course.CourseName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PlayingId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PlayingId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PlayingId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

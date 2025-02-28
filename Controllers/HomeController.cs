@@ -19,11 +19,15 @@ public class HomeController : Controller
     }
 
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        
-        ViewData["PlayId"] = new SelectList(_context.Plays.Include(c => c.Course).Where(c => c.CompetitionId == null || c.CompetitionId == 0 ), "PlayId", "Course.CourseName");
-        return View();
+        var applicationDbContext = _context.Playing
+           .Include(p => p.Play)
+           .ThenInclude(p => p.Course)
+           .Include(p => p.PublicUser);
+           
+        ViewData["PlayId"] = new SelectList(_context.Plays.Include(c => c.Course).Where(c => c.CompetitionId == null || c.CompetitionId == 0), "PlayId", "Course.CourseName");
+        return View(await applicationDbContext.ToListAsync());
     }
 
     public IActionResult Privacy()

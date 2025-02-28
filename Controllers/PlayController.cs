@@ -25,6 +25,17 @@ namespace discgolf_duels.Controllers
         // GET: Play
         public async Task<IActionResult> Index()
         {
+            string Id = _userManager.GetUserId(User);
+            var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+
+            if (thisPublicUser == null)
+            {
+                // Hantera fallet där PublicUser inte hittas
+                // Om PublicUser inte hittas, gör en redirect till PublicUser/Create
+                return RedirectToAction("Create", "PublicUser");
+            }
+
+
             var applicationDbContext = _context.Plays.Include(p => p.Competition).Include(p => p.Course);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -101,11 +112,19 @@ namespace discgolf_duels.Controllers
         {
             if (playId != 0)
             {
-                var play = await _context.Plays.FirstOrDefaultAsync(c => c.PlayId == playId && (c.CompetitionId == null || c.CompetitionId == 0));
-                var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == play.CourseId);
 
                 string Id = _userManager.GetUserId(User);
                 var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+
+                if (thisPublicUser == null)
+                {
+                    // Hantera fallet där PublicUser inte hittas
+                    // Om PublicUser inte hittas, gör en redirect till PublicUser/Create
+                    return RedirectToAction("Create", "PublicUser");
+                }
+
+                var play = await _context.Plays.FirstOrDefaultAsync(c => c.PlayId == playId && (c.CompetitionId == null || c.CompetitionId == 0));
+                var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == play.CourseId);
 
 
                 Playing playing = new Playing
@@ -123,7 +142,7 @@ namespace discgolf_duels.Controllers
                 .Where(p => p.PublicUserId == thisPublicUser.PublicUserId)
                 .OrderByDescending(p => p.RegisterDate)
                 .FirstOrDefaultAsync();
-                 return RedirectToAction("Edit", "Playing", new { id = thisPlaying.PlayingId });
+                return RedirectToAction("Edit", "Playing", new { id = thisPlaying.PlayingId });
 
             }
             return RedirectToAction("index", "Home");
