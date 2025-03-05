@@ -2,23 +2,14 @@
 Repot innehåller en discgolf-applikation. Applikationen är skapad med dotnet core MVC samt entity framework core och Identity framework. För att lagra data ansluter lösningen till en Sqlite-databas.
 
 ## Uppgiftens grundkrav
-Skapa ett API med ASP.net Core som hanterar en låtlista (en uppsättning med musik) med musik. Denna låtlista ska innehålla följande data:
-
-* Artist
-* Låt-titel
-* Spel-längd (i sekunder)
-* Kategori/Kategorier (exempelvis "rock", "pop", "trance", "dragspel")
-
-För godkänt genomförande av laboration ska ni i ert API visa på följande:
-
-* Att ni skapat ett API i ASP.net Core med CRUD.
-* Att det går att lägga till, läsa ut, radera och uppdatera data i låtlistan via exempelvis Postman, Advanced REST-client eller liknande program. (Ni behöver ej skapa en applikation som konsumerar API'et).
-* Data för låtlistan lagras i valfri databas-server (ej In Memory DB).
+* Skapa ett databasdrivet system baserat Entity Framework Core, där det via ett webbgränssnitt går att hämta, ändra och addera data i underliggande databas. Detta kallas vanligtvis för CRUD-gränssnitt (utifrån Create, Read, Update och Delete).
+* Applikationer ska innehålla en funktion för inloggning (säkerhetsnivån på din lösning är inte viktig).
+* Webbgränssnittet ni utvecklar ska på ett eller annat sätt inkludera att presentera data från databasen för publika (dvs ej inloggade) besökare.
+* Resulterande HTML-kod (den som automatgenererats och skickas till webbläsare) analyseras enligt W3C:s rekommendationer och validera korrekt (både HTML- och CSS-kod).
+* Webbplatsen ska följa generella riktlinjer vad det gäller tillgänglighet och användbarhet.
 
 ## Uppgiftkrav för överbetyg
-* API'et ska inte vara ett minimalt API, utan använda controller.
-* Databasen i din lösning ska innehålla minst två stycken tabeller - Du väljer själv hur du vill struktrera ditt data, om du till exempel vill göra kategorier i egen tabell, göra olika skivor som tillhör en artist eller kanske göra kommentarer/recension till respektive album? .
-* Returnerat data skall erbjuda god kvalitet och struktur. Undvik att returnera enbart id för data i relationer, utan försök att returnera hela objektet.
+* Extra funktionallitet som är något nytt som inte behandlas i kursens tre ordinarie laborationer och att det tillför värde till den färdiga lösningen.
 
 ## Min Lösning
 Mitt Api innehåller tre modeller/tabeller. Tabell för artister, sånger samt album. Dessa har relationer till varandra. ArtistId från tabellen artist används som FK i de andra två tabellerna. AlbumId från tabellen album används som FK i song-tabellen. Song-tabellen har en navigeringsegenskap i vid utläsning av data för att lista relaterade albums id samt artist-objekt. Även Album-tabellen använder navigeringsegenskaper för att läsa ut artist-objekt samt lista alla relaterade song-objekt.
