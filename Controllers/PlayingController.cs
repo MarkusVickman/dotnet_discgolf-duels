@@ -25,7 +25,7 @@ namespace discgolf_duels.Controllers
         // GET: Playing
         public async Task<IActionResult> Index()
         {
-            string Id = _userManager.GetUserId(User);
+            string? Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
             if (thisPublicUser == null)
@@ -39,9 +39,9 @@ namespace discgolf_duels.Controllers
 
 
             var applicationDbContext = _context.Playing
-            .Include(p => p.Play)
+            .Include(p => p.Play!)
             .ThenInclude(p => p.Course)
-            .Include(p => p.Play)
+            .Include(p => p.Play!)
             .ThenInclude(p => p.Competition)
             .Include(p => p.PublicUser)
             .Where(c => c.PublicUserId == userId)
@@ -59,9 +59,9 @@ namespace discgolf_duels.Controllers
             }
 
             var playing = await _context.Playing
-                .Include(p => p.Play)
+                .Include(p => p.Play!)
                 .ThenInclude(p => p.Course)
-            .Include(p => p.Play)
+            .Include(p => p.Play!)
             .ThenInclude(p => p.Competition)
                 .Include(p => p.PublicUser)
                 .FirstOrDefaultAsync(m => m.PlayingId == id);
@@ -78,7 +78,7 @@ namespace discgolf_duels.Controllers
         {
             if (id != 0)
             {
-                string Id = _userManager.GetUserId(User);
+                string? Id = _userManager.GetUserId(User);
                 var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
                 if (thisPublicUser == null)

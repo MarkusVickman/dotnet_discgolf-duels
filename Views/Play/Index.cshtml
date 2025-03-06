@@ -28,10 +28,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Competition.CompetitionId)
+                    @Html.DisplayFor(modelItem => item.Competition!.CompetitionId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                    @Html.DisplayFor(modelItem => item.Course!.CourseName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Active)

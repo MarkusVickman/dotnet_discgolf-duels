@@ -26,7 +26,7 @@ namespace discgolf_duels.Controllers
         // GET: Course
         public async Task<IActionResult> Index()
         {
-            string Id = _userManager.GetUserId(User);
+            string? Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
             if (thisPublicUser == null)
@@ -79,15 +79,18 @@ namespace discgolf_duels.Controllers
 
                 var thisCourse = await _context.Courses.FirstOrDefaultAsync(c => c.CourseName == course.CourseName);
 
-                Play play = new Play
+                if (thisCourse != null)
                 {
-                    CourseId = thisCourse.CourseId
-                };
+                    Play play = new Play
+                    {
+                        CourseId = thisCourse.CourseId
+                    };
 
-                _context.Plays.Add(play);
-                await _context.SaveChangesAsync();
+                    _context.Plays.Add(play);
+                    await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(course);
         }

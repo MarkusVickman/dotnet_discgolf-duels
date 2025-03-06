@@ -25,7 +25,7 @@ namespace discgolf_duels.Controllers
         // GET: Play
         public async Task<IActionResult> Index()
         {
-            string Id = _userManager.GetUserId(User);
+            string? Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
             if (thisPublicUser == null)
@@ -53,32 +53,38 @@ namespace discgolf_duels.Controllers
                 .Where(r => r.CompetitionId == id)
                 .ToListAsync();
 
-                var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == competition.CourseId);
+                var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == competition!.CourseId);
 
-                Play play = new Play
+                if (course != null)
                 {
-                    CompetitionId = id,
-                    CourseId = course.CourseId
-                };
+                    Play play = new Play
+                    {
+                        CompetitionId = id,
+                        CourseId = course.CourseId
+                    };
 
-                _context.Plays.Add(play);
-                await _context.SaveChangesAsync();
+                    _context.Plays.Add(play);
+                    await _context.SaveChangesAsync();
+                }
 
                 var thisPlay = _context.Plays.FirstOrDefault(c => c.CompetitionId == id);
 
-                foreach (var registration in thisRegistrations)
+                if (thisPlay != null)
                 {
-
-                    Playing playing = new Playing
+                    foreach (var registration in thisRegistrations)
                     {
-                        PlayId = thisPlay.PlayId,
-                        Par = course?.Par,
-                        GroupNr = null,
-                        PublicUserId = registration.PublicUserId
-                    };
 
-                    _context.Playing.Add(playing);
-                    await _context.SaveChangesAsync();
+                        Playing playing = new Playing
+                        {
+                            PlayId = thisPlay.PlayId,
+                            Par = course?.Par,
+                            GroupNr = null,
+                            PublicUserId = registration.PublicUserId
+                        };
+
+                        _context.Playing.Add(playing);
+                        await _context.SaveChangesAsync();
+                    }
                 }
 
                 return RedirectToAction("index", "Playing");
@@ -93,7 +99,7 @@ namespace discgolf_duels.Controllers
             if (playId != 0)
             {
 
-                string Id = _userManager.GetUserId(User);
+                string? Id = _userManager.GetUserId(User);
                 var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
                 if (thisPublicUser == null)
@@ -149,38 +155,38 @@ namespace discgolf_duels.Controllers
         // POST: Play/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-       /* [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlayId,CompetitionId,CourseId,Active")] Play play)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(play);
-                await _context.SaveChangesAsync();
+        /* [HttpPost]
+         [ValidateAntiForgeryToken]
+         public async Task<IActionResult> Create([Bind("PlayId,CompetitionId,CourseId,Active")] Play play)
+         {
+             if (ModelState.IsValid)
+             {
+                 _context.Add(play);
+                 await _context.SaveChangesAsync();
 
-                var findPlay = await _context.Plays.FirstOrDefaultAsync(p => p.CourseId == play.CourseId && p.CompetitionId == null);
+                 var findPlay = await _context.Plays.FirstOrDefaultAsync(p => p.CourseId == play.CourseId && p.CompetitionId == null);
 
-                var course = await _context.Courses.FirstOrDefaultAsync(p => p.CourseId == play.CourseId);
+                 var course = await _context.Courses.FirstOrDefaultAsync(p => p.CourseId == play.CourseId);
 
-                string Id = _userManager.GetUserId(User);
-                var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+                 string Id = _userManager.GetUserId(User);
+                 var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
-                Playing playing = new Playing
-                {
-                    PlayId = findPlay.PlayId,
-                    Par = course?.Par,
-                    GroupNr = null,
-                    PublicUserId = thisPublicUser.PublicUserId
-                };
+                 Playing playing = new Playing
+                 {
+                     PlayId = findPlay.PlayId,
+                     Par = course?.Par,
+                     GroupNr = null,
+                     PublicUserId = thisPublicUser.PublicUserId
+                 };
 
-                _context.Playing.Add(playing);
-                await _context.SaveChangesAsync();
+                 _context.Playing.Add(playing);
+                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("index", "Playing");
-            }
-            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId", play.CompetitionId);
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", play.CourseId);
-            return View(play);
-        }*/
+                 return RedirectToAction("index", "Playing");
+             }
+             ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId", play.CompetitionId);
+             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", play.CourseId);
+             return View(play);
+         }*/
     }
 }

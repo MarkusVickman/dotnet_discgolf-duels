@@ -26,7 +26,7 @@ namespace discgolf_duels.Controllers
         // GET: PublicUser
         public async Task<IActionResult> Index()
         {
-            string Id = _userManager.GetUserId(User);
+            string? Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
             if (thisPublicUser == null)
@@ -66,7 +66,7 @@ namespace discgolf_duels.Controllers
         // GET: PublicUser/Create
         public IActionResult Create()
         {
-            string Id = _userManager.GetUserId(User);
+            string? Id = _userManager.GetUserId(User);
 
             ViewBag.Id = Id;
             return View();

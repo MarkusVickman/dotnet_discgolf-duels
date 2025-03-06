@@ -27,7 +27,7 @@ namespace discgolf_duels.Controllers
         {
 
 
-            string Id = _userManager.GetUserId(User);
+            string? Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
             if (thisPublicUser == null)
@@ -70,7 +70,7 @@ namespace discgolf_duels.Controllers
         // GET: Registration/Create
         public async Task<IActionResult> Create(int id)
         {
-            string Id = _userManager.GetUserId(User);
+            string? Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
             if (thisPublicUser == null)
@@ -88,7 +88,7 @@ namespace discgolf_duels.Controllers
             .Where(p => p.CompetitionId == id)
             .CountAsync();
 
-            if (Competition.MaxPlayerCount <= count)
+            if (Competition != null && Competition.MaxPlayerCount <= count)
             {
                 return RedirectToAction("ListAll", "Competition");
             }

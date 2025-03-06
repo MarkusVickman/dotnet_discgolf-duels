@@ -17,6 +17,11 @@ I applikationen kan användare skapa konton. Om användaren inte är inloggad sy
 ## Uppgiftkrav för överbetyg
 * Extra funktionallitet som är något nytt som inte behandlas i kursens tre ordinarie laborationer och att det tillför värde till den färdiga lösningen.
 
+** För överbetyg har jag flera databas-tabeller som har relationer till varandra. Att hämta data i applikationens-controllers för aktuell tabell samt relaterade tabeller samtidigt är något vi inte gått igenom i kursen. **
+** Min lösning är också publicerad. **
+** Ska implementera MariaDB!!!!! **
+** Ska ordna mailserver!!!!! **
+
 ## Min Lösning
 För att hantera mycket relaterad data används en SQL-databas. Modeller och tabeller skapades för Competition, Playing, Play, Registration, PublicUser.
 

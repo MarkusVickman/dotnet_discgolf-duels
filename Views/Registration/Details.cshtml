@@ -14,19 +14,19 @@
             @Html.DisplayNameFor(model => model.Competition)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Competition.CompetitionName)
+            @Html.DisplayFor(model => model.Competition!.CompetitionName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Competition.Course)
+            @Html.DisplayNameFor(model => model.Competition!.Course)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Competition.Course.CourseName)
+            @Html.DisplayFor(model => model.Competition!.Course!.CourseName)
         </dd>
         <dt class="col-sm-2">
             Event director
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Competition.PublicUser.DisplayName)
+            @Html.DisplayFor(model => model.Competition!.PublicUser!.DisplayName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RegisterDate)

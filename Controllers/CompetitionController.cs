@@ -25,7 +25,7 @@ namespace discgolf_duels.Controllers
         // GET: Competition
         public async Task<IActionResult> Index()
         {
-            string Id = _userManager.GetUserId(User);
+            string? Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
             if (thisPublicUser == null)
@@ -159,13 +159,16 @@ namespace discgolf_duels.Controllers
         // GET: Competition/Create
         public async Task<IActionResult> Create()
         {
-            string Id = _userManager.GetUserId(User);
+            string? Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
-
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName");
-            ViewBag.PublicUserId = thisPublicUser.PublicUserId;
-            return View();
+            if (thisPublicUser != null)
+            {
+                ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName");
+                ViewBag.PublicUserId = thisPublicUser.PublicUserId;
+                return View();
+            }
+            return RedirectToAction("Index", "Competition");
         }
 
         // POST: Competition/Create
