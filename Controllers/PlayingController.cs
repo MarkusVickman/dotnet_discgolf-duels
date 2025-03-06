@@ -125,23 +125,28 @@ namespace discgolf_duels.Controllers
             string Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
-            var playing = await _context.Playing.FindAsync(id);
+            var playing = await _context.Playing
+            .Include(p => p.PublicUser)
+            .FirstOrDefaultAsync(p => p.PlayingId == id);
+
             if (playing == null)
             {
                 return NotFound();
             }
 
             var play = await _context.Plays
+                .Include(p => p.Competition)
                 .Where(c => c.PlayId == playing.PlayId)
                 .FirstOrDefaultAsync();
 
-            ViewBag.PublicUserId = playing.PublicUserId;
-            ViewBag.PlayId = playing.PlayId;
+            // ViewBag.PublicUserId = playing.PublicUserId;
+            // ViewBag.PlayId = playing.PlayId;
+            ViewBag.CompetitionName = play?.Competition?.CompetitionName;
 
-            if (play.CompetitionId != null && play.CompetitionId != 0)
+         /*   if (play?.CompetitionId != null && play.CompetitionId != 0)
             {
                 return View("EditGroup", playing);
-            }
+            }*/
 
             return View(playing);
         }

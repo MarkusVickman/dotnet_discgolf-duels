@@ -13,17 +13,17 @@
 
 }
 
-<h1>Edit</h1>
+<h1>@ViewBag.CompetitionName</h1>
+<h2>@Model.PublicUser?.DisplayName</h4>
 
-<h4>Playing</h4>
 <hr />
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PlayingId" />
             <div class="form-group">
-                <input asp-for="PlayId" type="hidden" class="form-control" asp-items="@ViewBag.PlayId" />
+                <input asp-for="PlayId" type="hidden" class="form-control" />
                 <span asp-validation-for="PlayId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -31,11 +31,16 @@
                 <span asp-validation-for="Par" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="PublicUserId" type="hidden" class="form-control" asp-items="@ViewBag.PublicUserId" />
+                <input asp-for="PublicUserId" type="hidden" class="form-control" />
                 <span asp-validation-for="PublicUserId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary mb-3" />
+                <label asp-for="GroupNr" class="control-label"></label>
+                <input asp-for="GroupNr" class="form-control" />
+                <span asp-validation-for="GroupNr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save score card" class="btn btn-primary mb-3 mt-3" />
             </div>
         </form>
     </div>
