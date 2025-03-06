@@ -85,9 +85,5 @@ För att hantera mycket relaterad data används en SQL-databas. Modeller och tab
 
 **IdentityUser är id från .NET Identity** 
 
-### Routes
-
- 
-
 
 ### Skapad av MARKUS VICKMAN (MAVI2302) 
