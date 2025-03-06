@@ -13,9 +13,6 @@
                 @Html.DisplayNameFor(model => model.Competition)
             </th>
             <th>
-                Event director
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.RegisterDate)
             </th>
             <th></th>
@@ -28,10 +25,7 @@
                 @Html.DisplayFor(modelItem => item.Competition.CompetitionName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Competition.PublicUser.DisplayName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegisterDate)
+                 @item.RegisterDate.ToString("yyyy-MM-dd HH:mm")
             </td>
             <td>
                 <a asp-controller="Competition" asp-action="PublicDetails" asp-route-id="@item.Competition.CompetitionId">Details</a> |

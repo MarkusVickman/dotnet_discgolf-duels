@@ -44,7 +44,8 @@ namespace discgolf_duels.Controllers
             .Include(p => p.Play)
             .ThenInclude(p => p.Competition)
             .Include(p => p.PublicUser)
-            .Where(c => c.PublicUserId == userId/* && (c.Play.CompetitionId == null || c.Play.CompetitionId == 0)*/);
+            .Where(c => c.PublicUserId == userId)
+            .OrderByDescending(p => p.RegisterDate);
 
             return View(await applicationDbContext.ToListAsync());
         }

@@ -40,7 +40,8 @@ namespace discgolf_duels.Controllers
             var applicationDbContext = _context.Competitions
             .Include(c => c.Course)
             .Include(c => c.PublicUser)
-            .Where(c => c.PublicUserId == userId);
+            .Where(c => c.PublicUserId == userId)
+            .OrderByDescending(p => p.CompetitionDate);
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -50,7 +51,8 @@ namespace discgolf_duels.Controllers
         {
             var applicationDbContext = _context.Competitions
             .Include(c => c.Course)
-            .Include(c => c.PublicUser);
+            .Include(c => c.PublicUser)
+            .OrderByDescending(p => p.CompetitionDate);
 
             return View(await applicationDbContext.ToListAsync());
         }

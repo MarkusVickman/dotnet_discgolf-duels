@@ -40,26 +40,6 @@ namespace discgolf_duels.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Play/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var play = await _context.Plays
-                .Include(p => p.Competition)
-                .Include(p => p.Course)
-                .FirstOrDefaultAsync(m => m.PlayId == id);
-            if (play == null)
-            {
-                return NotFound();
-            }
-
-            return View(play);
-        }
-
         // GET: Play/Create Competition
         public async Task<IActionResult> Create(int id)
         {
@@ -169,7 +149,7 @@ namespace discgolf_duels.Controllers
         // POST: Play/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+       /* [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PlayId,CompetitionId,CourseId,Active")] Play play)
         {
@@ -201,101 +181,6 @@ namespace discgolf_duels.Controllers
             ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId", play.CompetitionId);
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", play.CourseId);
             return View(play);
-        }
-
-        // GET: Play/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var play = await _context.Plays.FindAsync(id);
-            if (play == null)
-            {
-                return NotFound();
-            }
-            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId", play.CompetitionId);
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", play.CourseId);
-            return View(play);
-        }
-
-        // POST: Play/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PlayId,CompetitionId,CourseId,Active")] Play play)
-        {
-            if (id != play.PlayId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(play);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PlayExists(play.PlayId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CompetitionId"] = new SelectList(_context.Competitions, "CompetitionId", "CompetitionId", play.CompetitionId);
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseName", play.CourseId);
-            return View(play);
-        }
-
-        // GET: Play/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var play = await _context.Plays
-                .Include(p => p.Competition)
-                .Include(p => p.Course)
-                .FirstOrDefaultAsync(m => m.PlayId == id);
-            if (play == null)
-            {
-                return NotFound();
-            }
-
-            return View(play);
-        }
-
-        // POST: Play/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var play = await _context.Plays.FindAsync(id);
-            if (play != null)
-            {
-                _context.Plays.Remove(play);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool PlayExists(int id)
-        {
-            return _context.Plays.Any(e => e.PlayId == id);
-        }
+        }*/
     }
 }
