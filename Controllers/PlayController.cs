@@ -124,25 +124,42 @@ namespace discgolf_duels.Controllers
                 }
 
                 var play = await _context.Plays.FirstOrDefaultAsync(c => c.PlayId == playId && (c.CompetitionId == null || c.CompetitionId == 0));
-                var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == play.CourseId);
 
-
-                Playing playing = new Playing
+                if (play != null)
                 {
-                    PlayId = play.PlayId,
-                    Par = course?.Par,
-                    GroupNr = null,
-                    PublicUserId = thisPublicUser.PublicUserId
-                };
 
-                _context.Playing.Add(playing);
-                await _context.SaveChangesAsync();
+                    var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == play.CourseId);
 
-                var thisPlaying = await _context.Playing
-                .Where(p => p.PublicUserId == thisPublicUser.PublicUserId)
-                .OrderByDescending(p => p.RegisterDate)
-                .FirstOrDefaultAsync();
-                return RedirectToAction("Edit", "Playing", new { id = thisPlaying.PlayingId });
+                    string par = "";
+
+                    if (course != null)
+                    {
+                        for (int i = 0; i < course.Par.Length; i++)
+                        {
+                            par = par + "0";
+                        }
+                    }
+
+
+                    Playing playing = new Playing
+                    {
+                        PlayId = play.PlayId,
+                        Par = par,
+                        GroupNr = null,
+                        PublicUserId = thisPublicUser.PublicUserId
+                    };
+
+                    _context.Playing.Add(playing);
+                    await _context.SaveChangesAsync();
+
+                    var thisPlaying = await _context.Playing
+                    .Where(p => p.PublicUserId == thisPublicUser.PublicUserId)
+                    .OrderByDescending(p => p.RegisterDate)
+                    .FirstOrDefaultAsync();
+                    return RedirectToAction("Edit", "Playing", new { id = thisPlaying!.PlayingId });
+
+                }
+
 
             }
             return RedirectToAction("index", "Home");

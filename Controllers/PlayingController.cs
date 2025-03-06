@@ -122,8 +122,8 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
-            string Id = _userManager.GetUserId(User);
-            var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+            //   string Id = _userManager.GetUserId(User);
+            //   var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
             var playing = await _context.Playing
             .Include(p => p.PublicUser)
@@ -136,17 +136,23 @@ namespace discgolf_duels.Controllers
 
             var play = await _context.Plays
                 .Include(p => p.Competition)
+                .Include(p => p.Course)
                 .Where(c => c.PlayId == playing.PlayId)
                 .FirstOrDefaultAsync();
 
-            // ViewBag.PublicUserId = playing.PublicUserId;
-            // ViewBag.PlayId = playing.PlayId;
-            ViewBag.CompetitionName = play?.Competition?.CompetitionName;
-
-         /*   if (play?.CompetitionId != null && play.CompetitionId != 0)
+            if (play != null)
             {
-                return View("EditGroup", playing);
-            }*/
+
+                // ViewBag.PublicUserId = playing.PublicUserId;
+                // ViewBag.PlayId = playing.PlayId;
+                ViewBag.CompetitionName = play.Competition?.CompetitionName;
+                ViewBag.CourseName = play.Course!.CourseName;
+                ViewBag.CoursePar = play.Course.Par;
+            }
+            /*   if (play?.CompetitionId != null && play.CompetitionId != 0)
+               {
+                   return View("EditGroup", playing);
+               }*/
 
             return View(playing);
         }

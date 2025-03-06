@@ -14,7 +14,8 @@
 }
 
 <h1>@ViewBag.CompetitionName</h1>
-<h2>@Model.PublicUser?.DisplayName</h4>
+<h2>@Model.PublicUser?.DisplayName</h2>
+<h3>@ViewBag.CourseName</h3>
 
 <hr />
 <div class="row justify-content-center">
@@ -57,7 +58,6 @@
             <div class="mb-3 row justify-content-center">
                 <label class="col-3 col-form-label"><b>Basket: @(i+1)</b></label>
                 <div class="col-3">
-
                     <input type="number" class="form-control parArrayInput" onchange="updatePar()" value="@parArray[i]">
                 </div>
             </div>

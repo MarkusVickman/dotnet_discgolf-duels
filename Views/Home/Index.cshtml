@@ -6,11 +6,26 @@
     ViewData["Title"] = "Home Page";
 
 
+
     @functions {
-    public int SumOfDigits(string str)
+    public string SumOfDigits(string throws, string par)
     {
-        return str.Where(char.IsDigit).Sum(c => c - '0');
+
+        if (throws.Contains('0'))
+        {
+            return "Playing";
+        }
+
+        // Summera siffrorna i den första strängen
+        int sumOfThrows = throws.Where(char.IsDigit).Sum(c => c - '0');
+        
+        // Summera siffrorna i den andra strängen (till exempel @model.course.par)
+       int sumOfCoursePar = par.Where(char.IsDigit).Sum(c => c - '0');
+
+
+        return (sumOfCoursePar - sumOfThrows).ToString();
     }
+
 }
 }
 
@@ -54,7 +69,7 @@
                 @Html.DisplayNameFor(model => model.Par)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Play.Course)
+                @Html.DisplayNameFor(model => model.Play!.Course)
             </th>
             <th></th>
         </tr>
@@ -63,16 +78,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PublicUser.DisplayName)
+                @Html.DisplayFor(modelItem => item.PublicUser!.DisplayName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RegisterDate)
+                 @item.RegisterDate.ToString("yyyy-MM-dd HH:mm")
             </td>
             <td>
-                @SumOfDigits(item.Par)
+                @SumOfDigits(item.Par!, item.Play!.Course!.Par)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Play.Course.CourseName)
+                @Html.DisplayFor(modelItem => item.Play!.Course!.CourseName)
             </td>
         </tr>
 }
