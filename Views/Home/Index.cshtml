@@ -41,7 +41,7 @@
                 <form asp-controller="Play" asp-action="CreateSingle">
                     <div class="form-group">
                         <label for="PlayId" class="control-label"></label>
-                        <select id="PlayId" name="PlayId" a class="form-control" asp-items="ViewBag.PlayId"></select>
+                        <select id="PlayId" name="PlayId" class="form-control" asp-items="ViewBag.PlayId"></select>
                     </div>
                     <br>
                     <div class="form-group">
@@ -71,7 +71,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Play!.Course)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -93,4 +92,6 @@
 }
     </tbody>
 </table>
+</div>
+
 </div>
