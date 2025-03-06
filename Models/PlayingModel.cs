@@ -28,7 +28,7 @@ namespace discgolf_duels.Models
         [Display(Name = "User")]
         public PublicUser? PublicUser { get; set; }
 
-        [Display(Name = "Registration date")]
+        [Display(Name = "Created date")]
         public DateTime RegisterDate { get; set; } = DateTime.Now; // Registreringsdatum
     }
 }

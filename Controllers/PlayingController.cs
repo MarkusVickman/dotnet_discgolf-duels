@@ -41,8 +41,10 @@ namespace discgolf_duels.Controllers
             var applicationDbContext = _context.Playing
             .Include(p => p.Play)
             .ThenInclude(p => p.Course)
+            .Include(p => p.Play)
+            .ThenInclude(p => p.Competition)
             .Include(p => p.PublicUser)
-            .Where(c => c.PublicUserId == userId && (c.Play.CompetitionId == null || c.Play.CompetitionId == 0));
+            .Where(c => c.PublicUserId == userId/* && (c.Play.CompetitionId == null || c.Play.CompetitionId == 0)*/);
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -57,6 +59,9 @@ namespace discgolf_duels.Controllers
 
             var playing = await _context.Playing
                 .Include(p => p.Play)
+                .ThenInclude(p => p.Course)
+            .Include(p => p.Play)
+            .ThenInclude(p => p.Competition)
                 .Include(p => p.PublicUser)
                 .FirstOrDefaultAsync(m => m.PlayingId == id);
             if (playing == null)

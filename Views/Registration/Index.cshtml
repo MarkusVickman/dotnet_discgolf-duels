@@ -13,7 +13,7 @@
                 @Html.DisplayNameFor(model => model.Competition)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PublicUser)
+                Event director
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RegisterDate)
@@ -25,17 +25,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Competition.CompetitionId)
+                @Html.DisplayFor(modelItem => item.Competition.CompetitionName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PublicUser.DisplayName)
+                @Html.DisplayFor(modelItem => item.Competition.PublicUser.DisplayName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RegisterDate)
             </td>
             <td>
-                <a asp-controller="playing" asp-action="editCompetition" asp-route-id="@item.CompetitionId">Play</a> |
-                <a asp-action="Details" asp-route-id="@item.RegistrationId">Details</a> |
+                <a asp-controller="Competition" asp-action="PublicDetails" asp-route-id="@item.Competition.CompetitionId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.RegistrationId">Delete</a>
             </td>
         </tr>

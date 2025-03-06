@@ -25,7 +25,7 @@ namespace discgolf_duels.Controllers
         // GET: Registration
         public async Task<IActionResult> Index()
         {
-           
+
 
             string Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
@@ -87,11 +87,16 @@ namespace discgolf_duels.Controllers
             .Where(p => p.CompetitionId == id)
             .CountAsync();
 
-            if(Competition.MaxPlayerCount <= count || exists)
+            if (Competition.MaxPlayerCount <= count)
             {
                 return RedirectToAction("ListAll", "Competition");
             }
-            
+
+            if (exists)
+            {
+                return RedirectToAction("Index", "Registration");
+            }
+
             ViewBag.Competition = Competition;
             ViewBag.PublicUserId = thisPublicUser.PublicUserId;
             ViewBag.RegisterDate = DateTime.Now;

@@ -24,6 +24,9 @@
                 @Html.DisplayNameFor(model => model.RegisterDate)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Play.Competition)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Par)
             </th>
             <th>
@@ -38,6 +41,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.RegisterDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Play.Competition.CompetitionName)
                 </td>
                 <td>
                     @SumOfDigits(item.Par)

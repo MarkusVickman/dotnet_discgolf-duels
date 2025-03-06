@@ -30,7 +30,7 @@ namespace discgolf_duels.Models
         public required int PublicUserId { get; set; }
 
         [ForeignKey("PublicUserId")]
-        [Display(Name = "User")]
+        [Display(Name = "Event Director")]
         public PublicUser? PublicUser { get; set; }
 
         // Ny lista för att hantera registreringar
