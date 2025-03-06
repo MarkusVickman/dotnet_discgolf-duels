@@ -29,51 +29,61 @@ För att hantera mycket relaterad data används en SQL-databas. Modeller och tab
 
 ### Tabeller/Modeller
 
-```bash
-public class Competition
-    {
-        public int CompetitionId { get; set; }
-        public required String CompetitionName { get; set; }
-        public required int CourseId { get; set; }
 
-        [ForeignKey("CourseId")]
-        public Course? Course { get; set; }
+|                         | Competition                                |              |
+|-------------------------|--------------------------------------------|--------------|
+|CompetitionId            |int autoincrement                           | PK           |
+|CompetitionName          |varchar (required)                          |              |
+|CourseId                 |int (required, FK från `Course`)            | FK           |
+|CompetitionDate          |datetime (required)                         |              |
+|MaxPlayerCount           |int (required)                              |              |
+|PublicUserId             |int (required, FK från `PublicUser`)        | FK           |
+|Registrations            |ICollection (optional, länkad tabell)       |              |
 
-        public required DateTime CompetitionDate { get; set; }
 
-        public required int MaxPlayerCount { get; set; }
+|                         | Course                                     |              |
+|-------------------------|--------------------------------------------|--------------|
+|CourseId                 |int autoincrement                           | PK           |
+|Par                      |varchar (required)                          |              |
+|CourseName               |varchar(150) (required)                     |              |
 
-        public required int PublicUserId { get; set; }
 
-        [ForeignKey("PublicUserId")]
-        public PublicUser? PublicUser { get; set; }
 
-        public ICollection<Registration>? Registrations { get; set; }
-```
+|                         | Playing                                    |              |
+|-------------------------|--------------------------------------------|--------------|
+|PlayingId                |int autoincrement                           | PK           |
+|PlayId                   |int (required, FK från `Play`)              | FK           |
+|Par                      |varchar (optional)                          |              |
+|GroupNr                  |int (optional)                              |              |
+|PublicUserId             |int (required, FK från `PublicUser`)        | FK           |
+|RegisterDate             |datetime (default: DateTime.Now)            |              |
 
-```bash
-CREATE TABLE "Songs" (
-	"SongId"	INTEGER NOT NULL,
-	"Title"	TEXT NOT NULL,
-	"Length"	INTEGER NOT NULL,
-	"Category"	TEXT,
-	"ArtistId"	INTEGER NOT NULL,
-	"AlbumId"	INTEGER,
-	CONSTRAINT "PK_Songs" PRIMARY KEY("SongId" AUTOINCREMENT),
-	CONSTRAINT "FK_Songs_Albums_AlbumId" FOREIGN KEY("AlbumId") REFERENCES "Albums"("AlbumId"),
-	CONSTRAINT "FK_Songs_Artists_ArtistId" FOREIGN KEY("ArtistId") REFERENCES "Artists"("ArtistId") ON DELETE CASCADE
-)
-```
 
-```bash
-CREATE TABLE "Albums" (
-    "AlbumId" INTEGER NOT NULL CONSTRAINT "PK_Albums" PRIMARY KEY AUTOINCREMENT,
-    "AlbumName" TEXT NOT NULL,
-    "ReleaseYear" TEXT NOT NULL,
-    "ArtistId" INTEGER NOT NULL,
-    CONSTRAINT "FK_Albums_Artists_ArtistId" FOREIGN KEY ("ArtistId") REFERENCES "Artists" ("ArtistId") ON DELETE CASCADE
-)
-```
+|                         | Play                                       |              |
+|-------------------------|--------------------------------------------|--------------|
+|PlayId                   |int autoincrement                           | PK           |
+|CompetitionId            |int (optional, FK från `Competition`)       | FK           |
+|CourseId                 |int (required, FK från `Course`)            | FK           |
+|Active                   |bool (default: false)                       |              |
+
+
+|                         | Registration                               |              |
+|-------------------------|--------------------------------------------|--------------|
+|RegistrationId           |int autoincrement                           | PK           |
+|CompetitionId            |int (optional, FK från `Competition`)       | FK           |
+|PublicUserId             |int (required, FK från `PublicUser`)        | FK           |
+|RegisterDate             |datetime (default: DateTime.Now)            |              |
+
+
+|                         | PublicUser                                 |              |
+|-------------------------|--------------------------------------------|--------------|
+|PublicUserId             |int autoincrement                           | PK           |
+|DisplayName              |varchar(100) (required)                     |              |
+|PDGA_Nr                  |int (optional)                              |              |
+|PictureURL               |varchar(300) (optional)                     |              |
+|Id                       |varchar (required, FK från `IdentityUser`)  | FK           |
+
+**IdentityUser är id från .NET Identity** 
 
 ### Routes
 
