@@ -20,10 +20,10 @@
         int sumOfThrows = throws.Where(char.IsDigit).Sum(c => c - '0');
         
         // Summera siffrorna i den andra strängen (till exempel @model.course.par)
-       int sumOfCoursePar = par.Where(char.IsDigit).Sum(c => c - '0');
+        int sumOfCoursePar = par.Where(char.IsDigit).Sum(c => c - '0');
 
 
-        return (sumOfCoursePar - sumOfThrows).ToString();
+        return (sumOfThrows - sumOfCoursePar).ToString();
     }
 
 }
@@ -66,7 +66,7 @@
                 @Html.DisplayNameFor(model => model.RegisterDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Par)
+                Result
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Play!.Course)

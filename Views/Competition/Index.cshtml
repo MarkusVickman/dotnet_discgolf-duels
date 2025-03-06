@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Your Competitions";
+
 }
 
 <h1>Your Competitions</h1>
@@ -21,32 +22,27 @@
             <th>
                 @Html.DisplayNameFor(model => model.CompetitionDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxPlayerCount)
-            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompetitionName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.CourseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompetitionDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxPlayerCount)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CompetitionId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CompetitionId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CompetitionId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompetitionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course!.CourseName)
+                </td>
+                <td>
+                    @item.CompetitionDate.ToString("yyyy-MM-dd HH:mm")
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CompetitionId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CompetitionId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CompetitionId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -7,6 +7,28 @@
 
         var registrations = ViewBag.Registrations as List<Registration>;
         var playings = ViewBag.Playings as List<Playing>;
+
+
+    @functions {
+    public string SumOfDigits(string throws, string par)
+    {
+
+        if (throws.Contains('0'))
+        {
+            return "Playing";
+        }
+
+        // Summera siffrorna i den första strängen
+        int sumOfThrows = throws.Where(char.IsDigit).Sum(c => c - '0');
+
+        // Summera siffrorna i den andra strängen (till exempel @model.course.par)
+        int sumOfCoursePar = par.Where(char.IsDigit).Sum(c => c - '0');
+
+
+        return (sumOfThrows - sumOfCoursePar).ToString();
+    }
+
+}
 }
 
 <h1>Details</h1>
@@ -25,7 +47,7 @@
             @Html.DisplayNameFor(model => model.Course)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Course.CourseName)
+            @Html.DisplayFor(model => model.Course!.CourseName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CompetitionDate)
@@ -43,7 +65,7 @@
             @Html.DisplayNameFor(model => model.PublicUser)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PublicUser.DisplayName)
+            @Html.DisplayFor(model => model.PublicUser!.DisplayName)
         </dd>
     </dl>
 </div>
@@ -75,7 +97,7 @@
     {
                         <tr>
                             <td>
-                                @registration.PublicUser.DisplayName
+                                @registration.PublicUser!.DisplayName
                             </td>
                             <td>
                                 @registration.RegisterDate
@@ -99,7 +121,10 @@
                             User
                         </th>
                         <th>
-                            Par
+                            Result
+                        </th>
+                        <th>
+                            Group
                         </th>
                     </tr>
                 </thead>       
@@ -108,10 +133,10 @@
     {
                         <tr>
                             <td>
-                                @playing.PublicUser.DisplayName
+                                @playing.PublicUser!.DisplayName
                             </td>
                             <td>
-                                @playing.Par
+                                @SumOfDigits(@playing.Par!, @playing.Play!.Course!.Par)
                             </td>
                             <td>
                                 @playing.GroupNr

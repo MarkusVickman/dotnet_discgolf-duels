@@ -2,6 +2,19 @@
 
 @{
     ViewData["Title"] = "Courses";
+
+@functions {
+    public string SumOfDigits(string par)
+    {
+
+        // Summera siffrorna i den andra strängen (till exempel @model.course.par)
+        int sumOfCoursePar = par.Where(char.IsDigit).Sum(c => c - '0');
+
+
+        return sumOfCoursePar.ToString();
+    }
+
+}
 }
 
 <h1>Courses</h1>
@@ -16,25 +29,31 @@
                 @Html.DisplayNameFor(model => model.Par)
             </th>
             <th>
+               Par total
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.CourseName)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Par)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CourseId">Details</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Par)
+                </td>
+                <td>
+                    @SumOfDigits(item.Par)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CourseId">Edit</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

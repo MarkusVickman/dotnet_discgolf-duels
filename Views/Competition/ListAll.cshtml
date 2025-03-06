@@ -20,12 +20,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.CompetitionDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxPlayerCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublicUser)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -37,16 +31,10 @@
                     @Html.DisplayFor(modelItem => item.CompetitionName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                    @Html.DisplayFor(modelItem => item.Course!.CourseName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CompetitionDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaxPlayerCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PublicUser.DisplayName)
+                    @item.CompetitionDate.ToString("yyyy-MM-dd HH:mm")
                 </td>
                 <td>
                     @if (SignInManager.IsSignedIn(User))
