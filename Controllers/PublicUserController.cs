@@ -102,7 +102,9 @@ namespace discgolf_duels.Controllers
             {
                 return NotFound();
             }
-            ViewData["Id"] = new SelectList(_context.Users, "Id", "Id", publicUser.Id);
+
+            ViewBag.Id = publicUser.Id;
+
             return View(publicUser);
         }
 
@@ -111,9 +113,9 @@ namespace discgolf_duels.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PublicUserId,DisplayName,PDGA_Nr,PictureURL,Id")] PublicUser publicUser)
+        public async Task<IActionResult> Edit([Bind("PublicUserId,DisplayName,PDGA_Nr,PictureURL,Id")] PublicUser publicUser)
         {
-            if (id != publicUser.PublicUserId)
+            if (publicUser.PublicUserId == 0)
             {
                 return NotFound();
             }
