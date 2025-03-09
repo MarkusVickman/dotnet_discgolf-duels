@@ -23,7 +23,11 @@
         int sumOfCoursePar = par.Where(char.IsDigit).Sum(c => c - '0');
 
 
-        return (sumOfThrows - sumOfCoursePar).ToString();
+        if (sumOfThrows - sumOfCoursePar < 0) {
+            return (sumOfThrows - sumOfCoursePar).ToString();
+        } else {
+        return '+' + (sumOfThrows - sumOfCoursePar).ToString();
+        }
     }
 
 }

@@ -55,6 +55,8 @@ namespace discgolf_duels.Controllers
 
                 var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == competition!.CourseId);
 
+                string par = "";
+
                 if (course != null)
                 {
                     Play play = new Play
@@ -62,6 +64,11 @@ namespace discgolf_duels.Controllers
                         CompetitionId = id,
                         CourseId = course.CourseId
                     };
+
+                    for (int i = 0; i < course.Par.Length; i++)
+                    {
+                        par = par + "0";
+                    }
 
                     _context.Plays.Add(play);
                     await _context.SaveChangesAsync();
@@ -77,7 +84,7 @@ namespace discgolf_duels.Controllers
                         Playing playing = new Playing
                         {
                             PlayId = thisPlay.PlayId,
-                            Par = course?.Par,
+                            Par = par,
                             GroupNr = null,
                             PublicUserId = registration.PublicUserId
                         };
