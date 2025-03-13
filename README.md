@@ -7,6 +7,8 @@ I applikationen kan användare skapa konton. Om användaren inte är inloggad sy
 * Registrera på andras tävlingar
 * Spela tävling
 
+Besök webbplatsen [Disc golf duels](https://discgolf-duels-b3ake0adgjf3btd2.swedencentral-01.azurewebsites.net/).
+
 ## Uppgiftens grundkrav
 * Skapa ett databasdrivet system baserat Entity Framework Core, där det via ett webbgränssnitt går att hämta, ändra och addera data i underliggande databas. Detta kallas vanligtvis för CRUD-gränssnitt (utifrån Create, Read, Update och Delete).
 * Applikationer ska innehålla en funktion för inloggning (säkerhetsnivån på din lösning är inte viktig).
