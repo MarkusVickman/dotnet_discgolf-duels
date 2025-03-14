@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace discgolf_duels.Models
 {
+
+    /*
+    modell/tabell för tävlingar. 
+    Den har FK från publicuser(den som skapat) samt från tillhörande bana 
+    */
+
     public class Competition
     {
         [Key]

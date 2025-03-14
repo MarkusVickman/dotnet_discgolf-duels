@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace discgolf_duels.Models
 {
+    //Tabell och modell för den publika profilen. Den har indentityuser.id som FK
     public class PublicUser
     {
         [Key]

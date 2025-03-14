@@ -31,6 +31,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Competition"
                                 asp-action="ListAll">Competitions</a>
                         </li>
+                        <!-- Kontrollerar om användaren är inloggad för att bara visa för inloggade användare  -->
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item dropdown">

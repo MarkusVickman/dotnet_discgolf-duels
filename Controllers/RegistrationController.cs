@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +35,7 @@ namespace discgolf_duels.Controllers
 
             int userId = thisPublicUser.PublicUserId;
 
+            // skickar med användarspecifika tävlingsregistreringar
             var applicationDbContext = _context.Registrations
             .Include(r => r.Competition)
             .Include(r => r.PublicUser)
@@ -67,9 +64,10 @@ namespace discgolf_duels.Controllers
             return View(registration);
         }
 
-        // GET: Registration/Create
+        // Registration/Create är helt ombyggd från scaffoding och tar in tävlings id som parameter för att skapa registrering till tävling
         public async Task<IActionResult> Create(int id)
         {
+            //Läser in användare
             string? Id = _userManager.GetUserId(User);
             var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
 
@@ -80,19 +78,24 @@ namespace discgolf_duels.Controllers
                 return RedirectToAction("Create", "PublicUser");
             }
 
+            //hämtar aktuell tävling med id
             var Competition = await _context.Competitions.FirstOrDefaultAsync(p => p.CompetitionId == id);
 
+            // kontrollerar om användaren redan är registrerad isåfall får den inte registrera igen
             var exists = await _context.Registrations.AnyAsync(p => p.CompetitionId == id && p.PublicUserId == thisPublicUser.PublicUserId);
 
+            // läser in max antal spelare
             var count = await _context.Registrations
             .Where(p => p.CompetitionId == id)
             .CountAsync();
 
+            //Om max antal spelare är uppnått dirigeras användaren inte allmänna tävlingssidan
             if (Competition != null && Competition.MaxPlayerCount <= count)
             {
                 return RedirectToAction("ListAll", "Competition");
             }
 
+            //Om användaren redan är registrerad dirigeras den till sina registrerade tävlingar
             if (exists)
             {
                 return RedirectToAction("Index", "Registration");

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using discgolf_duels.Data;
-using discgolf_duels.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,17 +11,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 
-// Add services to the container. För att ansluta med sqlite
-/*
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
-    */
-
-// Lägger till IEmailSender
+// Lägger till service IEmailSender
 builder.Services.AddTransient<IEmailSender>(sp =>
-new EmailSender("server", 587, "adress", "password"));
-
+new EmailSender(""));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

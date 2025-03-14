@@ -2,6 +2,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
+
+
+//Under uppbyggnad till senare implementeringar
 namespace discgolf_duels.Models
 {
     public class Friend

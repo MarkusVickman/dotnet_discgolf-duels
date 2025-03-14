@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using discgolf_duels.Data;
 using discgolf_duels.Models;
@@ -35,8 +30,6 @@ namespace discgolf_duels.Controllers
                 // Om PublicUser inte hittas, gör en redirect till PublicUser/Create
                 return RedirectToAction("Create", "PublicUser");
             }
-
-
 
             return View(await _context.Courses.ToListAsync());
         }

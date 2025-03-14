@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +33,7 @@ namespace discgolf_duels.Controllers
 
             int userId = thisPublicUser.PublicUserId;
 
-
+            //Inkluderar data från play, course samt publicuser till vyn
             var applicationDbContext = _context.Playing
             .Include(p => p.Play!)
             .ThenInclude(p => p.Course)
@@ -58,6 +54,7 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
+            //Inkluderar data från play, competition, course samt publicuser till vyn
             var playing = await _context.Playing
                 .Include(p => p.Play!)
                 .ThenInclude(p => p.Course)
@@ -123,9 +120,7 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
-            //   string Id = _userManager.GetUserId(User);
-            //   var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
-
+            //Läser in och kontrollerar att id finns
             var playing = await _context.Playing
             .Include(p => p.PublicUser)
             .FirstOrDefaultAsync(p => p.PlayingId == id);
@@ -135,6 +130,7 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
+            //Hämtar aktuell "spelmall" och skickar med värden tilö vyn
             var play = await _context.Plays
                 .Include(p => p.Competition)
                 .Include(p => p.Course)
@@ -143,17 +139,12 @@ namespace discgolf_duels.Controllers
 
             if (play != null)
             {
-
                 // ViewBag.PublicUserId = playing.PublicUserId;
                 // ViewBag.PlayId = playing.PlayId;
                 ViewBag.CompetitionName = play.Competition?.CompetitionName;
                 ViewBag.CourseName = play.Course!.CourseName;
                 ViewBag.CoursePar = play.Course.Par;
             }
-            /*   if (play?.CompetitionId != null && play.CompetitionId != 0)
-               {
-                   return View("EditGroup", playing);
-               }*/
 
             return View(playing);
         }
@@ -222,24 +213,11 @@ namespace discgolf_duels.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var playing = await _context.Playing.FindAsync(id);
+            
             if (playing != null)
             {
                 _context.Playing.Remove(playing);
                 await _context.SaveChangesAsync();
-
-
-
-                //kod för att ta bort play om ingen playing är aktiv. Kanske är onödig då jag instället gjort play knytna till banor
-                /* bool playEmpty = !await _context.Playing.AnyAsync(p => p.PlayId == playing.PlayId);
-
-                 if (playEmpty)
-                 {
-                     var play = await _context.Plays.FindAsync(playing.PlayId);
-                     if (play != null)
-                     {
-                         _context.Plays.Remove(play);
-                     }
-                 }*/
             }
 
             await _context.SaveChangesAsync();

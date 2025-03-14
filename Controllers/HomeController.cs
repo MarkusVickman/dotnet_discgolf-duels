@@ -18,7 +18,7 @@ public class HomeController : Controller
         _context = context;
     }
 
-
+    // startsidan som skickar med data från tabellen playing för alla rundor samt play för respektivebana men utesluter tävlingsspecifika play
     public async Task<IActionResult> Index()
     {
         var applicationDbContext = _context.Playing
@@ -26,7 +26,7 @@ public class HomeController : Controller
            .ThenInclude(p => p!.Course)
            .Include(p => p.PublicUser)
            .OrderByDescending(p => p.RegisterDate);
-           
+
         ViewData["PlayId"] = new SelectList(_context.Plays.Include(c => c.Course).Where(c => c.CompetitionId == null || c.CompetitionId == 0), "PlayId", "Course.CourseName");
         return View(await applicationDbContext.ToListAsync());
     }

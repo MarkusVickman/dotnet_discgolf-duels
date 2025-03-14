@@ -433,4 +433,4 @@ C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\bin\Debug\net9.0\MySqlConnector.dll
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\bin\Debug\net9.0\Sprache.dll
-C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\compressed\if0yx0k4rw-hgmzy34bnq.gz
+C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\compressed\if0yx0k4rw-iadymafdyw.gz

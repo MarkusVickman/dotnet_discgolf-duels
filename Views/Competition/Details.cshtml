@@ -6,7 +6,7 @@
     var registrations = ViewBag.Registrations as List<Registration>;
     var playings = ViewBag.Playings as List<Playing>;
 
-
+//Funktion som skriver ut par på ett snyggare sätt
             @functions {
     public string SumOfDigits(string throws, string par)
     {
@@ -76,6 +76,8 @@
 </div>
 <br>
 <br>
+
+<!-- skriver även ut relaterade data från registreringar samt från playings-->
 @if (registrations != null)
 {
      <div>

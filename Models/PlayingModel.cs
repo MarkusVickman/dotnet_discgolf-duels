@@ -4,6 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace discgolf_duels.Models
 {
 
+/*
+tabell/modell som hanterar spel. Dessa används en per spelare per runda.
+har FK från Publicuser och från Play
+*/
     public class Playing
     {
         [Key]

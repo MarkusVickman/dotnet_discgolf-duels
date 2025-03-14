@@ -4,6 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace discgolf_duels.Models
 {
+
+    /* 
+    tabell/modell för varje bana
+    */
     public class Course
     {
         [Key]

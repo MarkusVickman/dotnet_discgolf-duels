@@ -4,12 +4,12 @@ using discgolf_duels.Models;
 
 namespace discgolf_duels.Data;
 
+// DbContext som tar med alla tabellerna/modellerna
 public class ApplicationDbContext : IdentityDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     { }
-
 
     public DbSet<Competition> Competitions { get; set; }
 

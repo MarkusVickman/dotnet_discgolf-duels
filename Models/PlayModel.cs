@@ -3,6 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace discgolf_duels.Models
 {
+    /* 
+    denna tabell/modell används som grund för varje playing som startas. Den skapas automatiskt för varje bana samt vid start av en tävling
+    Har FK från competition samt från course
+     */
     public class Play
     {
         [Key]

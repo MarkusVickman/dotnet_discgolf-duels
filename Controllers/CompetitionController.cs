@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -66,6 +62,7 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
+            // skickar med data från registrerade deltagare
             ViewBag.Registrations = await _context.Registrations
             .Include(r => r.Competition)
             .Include(r => r.PublicUser)
@@ -75,9 +72,9 @@ namespace discgolf_duels.Controllers
             var plays = await _context.Plays
             .FirstOrDefaultAsync(r => r.CompetitionId == id);
 
+            //om spel finns skickar playing / aktuella rundor med
             if (plays != null)
             {
-
                 var playings = await _context.Playing
                 .Include(p => p.Play)
                 .Include(p => p.PublicUser)
@@ -86,7 +83,6 @@ namespace discgolf_duels.Controllers
 
                 // Sätt playings i ViewBag
                 ViewBag.Playings = playings;
-
             }
 
             var competition = await _context.Competitions
@@ -101,7 +97,8 @@ namespace discgolf_duels.Controllers
             return View(competition);
         }
 
-        // GET: Competition/Details/5
+        // GET: Competition/PublicDetails/5
+        //Specifik sida för de som inte är med i tävlingen
         public async Task<IActionResult> PublicDetails(int? id)
         {
             if (id == null)
@@ -109,35 +106,27 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
+            // skickar med data från registrerade deltagare
             ViewBag.Registations = await _context.Registrations
             .Include(r => r.Competition)
             .Include(r => r.PublicUser)
             .Where(r => r.CompetitionId == id)
             .ToListAsync();
 
-            ViewBag.Registrations = await _context.Registrations
-         .Include(r => r.Competition)
-         .Include(r => r.PublicUser)
-         .Where(r => r.CompetitionId == id)
-         .ToListAsync();
-
             var plays = await _context.Plays
             .FirstOrDefaultAsync(r => r.CompetitionId == id);
 
+            //om spel finns skickar playing / aktuella rundor med
             if (plays != null)
             {
-
                 var playings = await _context.Playing
                 .Include(p => p.Play)
                 .Include(p => p.PublicUser)
                 .Where(r => r.PlayId == plays.PlayId)
                 .ToListAsync();
 
-
-
                 // Sätt playings i ViewBag
                 ViewBag.Playings = playings;
-
             }
 
             var competition = await _context.Competitions
@@ -145,15 +134,12 @@ namespace discgolf_duels.Controllers
                 .Include(c => c.PublicUser)
                 .FirstOrDefaultAsync(m => m.CompetitionId == id);
 
-
             if (competition == null)
             {
                 return NotFound();
             }
 
-
             return View(competition);
-
         }
 
         // GET: Competition/Create
