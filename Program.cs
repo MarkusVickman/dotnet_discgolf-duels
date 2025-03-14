@@ -13,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Lägger till service IEmailSender
 builder.Services.AddTransient<IEmailSender>(sp =>
-new EmailSender(""));
+new EmailSender("mail.inleed.com", 587, "disc-golf-duels@markus.webb", "scPkRfQe4tcqrq3uDPYn"));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
