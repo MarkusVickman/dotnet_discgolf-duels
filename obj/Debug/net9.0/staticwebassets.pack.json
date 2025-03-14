@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
       "Id": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

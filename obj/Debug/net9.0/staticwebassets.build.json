@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "McpIWv9LPmPr7axAID1MX4bXQ4VxEWuZ3HxTBxqlFyI=",
+  "Hash": "VcrEVVcvtWbLdflksWkZgk3mcY7X5/mKkWMotFUIu+Q=",
   "Source": "discgolf-duels",
   "BasePath": "_content/discgolf-duels",
   "Mode": "Default",
@@ -2537,12 +2537,12 @@
       "OriginalItemSpec": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\if0yx0k4rw-61n19gt1b8.gz",
+      "Identity": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\if0yx0k4rw-hgmzy34bnq.gz",
       "SourceId": "discgolf-duels",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/discgolf-duels",
-      "RelativePath": "favicon#[.{fingerprint=61n19gt1b8}]?.ico.gz",
+      "RelativePath": "favicon#[.{fingerprint=hgmzy34bnq}]?.ico.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2551,8 +2551,8 @@
       "RelatedAsset": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\favicon.ico",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "nezsohjtde",
-      "Integrity": "wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=",
+      "Fingerprint": "kyhhq8b2j0",
+      "Integrity": "LB+RXVr4bspTQ/tt8fwKCa2EFlE+pic7AQcsH8Ga5AY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\favicon.ico"
@@ -4063,11 +4063,32 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "61n19gt1b8",
-      "Integrity": "Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=",
+      "Fingerprint": "hgmzy34bnq",
+      "Integrity": "j1WXc5Fs4NXAOhQjjZ9g7gGrd2hKj+cV1i+4m/kt8LU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\favicon.png",
+      "SourceId": "discgolf-duels",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\",
+      "BasePath": "_content/discgolf-duels",
+      "RelativePath": "favicon#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qb0jzlc2r0",
+      "Integrity": "Zj/qyO4rXpcCp5KQmDhvnNPOf83A8XHCbjrAIqNyYEE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
       "Identity": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\js\\site.js",
@@ -6284,13 +6305,13 @@
       ]
     },
     {
-      "Route": "favicon.61n19gt1b8.ico",
-      "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\if0yx0k4rw-61n19gt1b8.gz",
+      "Route": "favicon.hgmzy34bnq.ico",
+      "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\if0yx0k4rw-hgmzy34bnq.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000405022276"
+          "Quality": "0.004629629630"
         }
       ],
       "ResponseHeaders": [
@@ -6300,15 +6321,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2468"
+          "Value": "215"
         },
         {
           "Name": "ETag",
-          "Value": "\"wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=\""
+          "Value": "\"LB+RXVr4bspTQ/tt8fwKCa2EFlE+pic7AQcsH8Ga5AY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 25 Feb 2025 09:51:41 GMT"
+          "Value": "Wed, 06 Dec 2023 10:30:11 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6328,13 +6349,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+          "Value": "W/\"j1WXc5Fs4NXAOhQjjZ9g7gGrd2hKj+cV1i+4m/kt8LU=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "61n19gt1b8"
+          "Value": "hgmzy34bnq"
         },
         {
           "Name": "label",
@@ -6342,12 +6363,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+          "Value": "sha256-j1WXc5Fs4NXAOhQjjZ9g7gGrd2hKj+cV1i+4m/kt8LU="
         }
       ]
     },
     {
-      "Route": "favicon.61n19gt1b8.ico",
+      "Route": "favicon.hgmzy34bnq.ico",
       "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
@@ -6357,7 +6378,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5430"
+          "Value": "318"
         },
         {
           "Name": "Content-Type",
@@ -6365,11 +6386,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+          "Value": "\"j1WXc5Fs4NXAOhQjjZ9g7gGrd2hKj+cV1i+4m/kt8LU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 25 Feb 2025 09:51:41 GMT"
+          "Value": "Wed, 06 Dec 2023 10:30:11 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6379,7 +6400,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "61n19gt1b8"
+          "Value": "hgmzy34bnq"
         },
         {
           "Name": "label",
@@ -6387,13 +6408,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+          "Value": "sha256-j1WXc5Fs4NXAOhQjjZ9g7gGrd2hKj+cV1i+4m/kt8LU="
         }
       ]
     },
     {
-      "Route": "favicon.61n19gt1b8.ico.gz",
-      "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\if0yx0k4rw-61n19gt1b8.gz",
+      "Route": "favicon.hgmzy34bnq.ico.gz",
+      "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\if0yx0k4rw-hgmzy34bnq.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6402,7 +6423,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2468"
+          "Value": "215"
         },
         {
           "Name": "Content-Type",
@@ -6410,11 +6431,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=\""
+          "Value": "\"LB+RXVr4bspTQ/tt8fwKCa2EFlE+pic7AQcsH8Ga5AY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 25 Feb 2025 09:51:41 GMT"
+          "Value": "Wed, 06 Dec 2023 10:30:11 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6432,7 +6453,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "61n19gt1b8"
+          "Value": "hgmzy34bnq"
         },
         {
           "Name": "label",
@@ -6440,7 +6461,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0="
+          "Value": "sha256-LB+RXVr4bspTQ/tt8fwKCa2EFlE+pic7AQcsH8Ga5AY="
         }
       ]
     },
@@ -6483,12 +6504,12 @@
     },
     {
       "Route": "favicon.ico",
-      "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\if0yx0k4rw-61n19gt1b8.gz",
+      "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\if0yx0k4rw-hgmzy34bnq.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000405022276"
+          "Quality": "0.004629629630"
         }
       ],
       "ResponseHeaders": [
@@ -6498,15 +6519,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2468"
+          "Value": "215"
         },
         {
           "Name": "ETag",
-          "Value": "\"wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=\""
+          "Value": "\"LB+RXVr4bspTQ/tt8fwKCa2EFlE+pic7AQcsH8Ga5AY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 25 Feb 2025 09:51:41 GMT"
+          "Value": "Wed, 06 Dec 2023 10:30:11 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6526,13 +6547,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+          "Value": "W/\"j1WXc5Fs4NXAOhQjjZ9g7gGrd2hKj+cV1i+4m/kt8LU=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+          "Value": "sha256-j1WXc5Fs4NXAOhQjjZ9g7gGrd2hKj+cV1i+4m/kt8LU="
         }
       ]
     },
@@ -6547,7 +6568,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5430"
+          "Value": "318"
         },
         {
           "Name": "Content-Type",
@@ -6555,11 +6576,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+          "Value": "\"j1WXc5Fs4NXAOhQjjZ9g7gGrd2hKj+cV1i+4m/kt8LU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 25 Feb 2025 09:51:41 GMT"
+          "Value": "Wed, 06 Dec 2023 10:30:11 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6569,13 +6590,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+          "Value": "sha256-j1WXc5Fs4NXAOhQjjZ9g7gGrd2hKj+cV1i+4m/kt8LU="
         }
       ]
     },
     {
       "Route": "favicon.ico.gz",
-      "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\if0yx0k4rw-61n19gt1b8.gz",
+      "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\obj\\Debug\\net9.0\\compressed\\if0yx0k4rw-hgmzy34bnq.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6584,7 +6605,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2468"
+          "Value": "215"
         },
         {
           "Name": "Content-Type",
@@ -6592,11 +6613,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0=\""
+          "Value": "\"LB+RXVr4bspTQ/tt8fwKCa2EFlE+pic7AQcsH8Ga5AY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 25 Feb 2025 09:51:41 GMT"
+          "Value": "Wed, 06 Dec 2023 10:30:11 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6614,7 +6635,89 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-wfFuuYm+Lh6RbCeeiUqxw334b/hIOkp5j9eokGUM1Y0="
+          "Value": "sha256-LB+RXVr4bspTQ/tt8fwKCa2EFlE+pic7AQcsH8Ga5AY="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.png",
+      "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\favicon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13606"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Zj/qyO4rXpcCp5KQmDhvnNPOf83A8XHCbjrAIqNyYEE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 06 Dec 2023 10:18:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Zj/qyO4rXpcCp5KQmDhvnNPOf83A8XHCbjrAIqNyYEE="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.qb0jzlc2r0.png",
+      "AssetFile": "C:\\Users\\marku\\Desktop\\webbutveckling-ht2024\\dotnet_kurs\\projekt\\discgolf-duels\\wwwroot\\favicon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13606"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Zj/qyO4rXpcCp5KQmDhvnNPOf83A8XHCbjrAIqNyYEE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 06 Dec 2023 10:18:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qb0jzlc2r0"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Zj/qyO4rXpcCp5KQmDhvnNPOf83A8XHCbjrAIqNyYEE="
         }
       ]
     },

@@ -1,5 +1,5 @@
 # Dotnet - Projekt - Discgolf Duels
-Repot innehåller en discgolf-applikation. Applikationen är skapad med dotnet core MVC samt entity framework core och Identity framework. För att lagra data ansluter lösningen till en MariaDb-databas.
+Repot innehåller en discgolf-applikation. Applikationen är skapad med dotnet core MVC samt entity framework core och Identity framework. För att lagra data ansluter lösningen till en MariaDb-databas. Applikationen är kopplad till en extern email-server och stöder funktioner som bekräftelse-mail och återställa lösenord.
 I applikationen kan användare skapa konton. Om användaren inte är inloggad syns endast tävlingar samt alla spelade rundor. När användaren loggar in för första gången kan den skapa en publikprofil för att komma åt följande funktioner:
 * Spela och hantera rundor
 * Lägga till och hantera banor
@@ -24,9 +24,10 @@ För att hantera mycket relaterad data används en SQL-databas. Modeller och tab
 
 ### För överbetyg 
 
-* har jag flera databas-tabeller som har relationer till varandra. Att hämta data i applikationens-controllers för aktuell tabell samt relaterade tabeller samtidigt är något vi inte gått igenom i kursen.
+* Har flera databas-tabeller som har relationer till varandra. Att hämta data i applikationens-controllers för aktuell tabell samt relaterade tabeller samtidigt är något vi inte gått igenom i kursen.
 * Min lösning är också publicerad.
 * Ansluter och lagrar data i en extern mariaDb-databas
+* Email-funktionalitet via ansluten email-server med lämpligt namn på email-adressen.
 
 ### Tabeller/Modeller
 

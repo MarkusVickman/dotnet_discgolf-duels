@@ -197,7 +197,6 @@ C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\compressed\v0zgfp0y55-87fc7y1x7t.gz
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\compressed\yfc7ypekbg-mlv21k5csn.gz
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\compressed\0m97gxmujb-b9sayid5wm.gz
-C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\compressed\if0yx0k4rw-61n19gt1b8.gz
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\compressed\vg1m72r3tp-xtxxf3hu2r.gz
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\compressed\ewqlhsjj9m-bqjiyaj88i.gz
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\compressed\sv7ra7dbcp-c2jlpeoesf.gz
@@ -434,3 +433,4 @@ C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\bin\Debug\net9.0\MySqlConnector.dll
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\bin\Debug\net9.0\Sprache.dll
+C:\Users\marku\Desktop\webbutveckling-ht2024\dotnet_kurs\projekt\discgolf-duels\obj\Debug\net9.0\compressed\if0yx0k4rw-hgmzy34bnq.gz
