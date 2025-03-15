@@ -107,7 +107,7 @@ namespace discgolf_duels.Controllers
             }
 
             // skickar med data från registrerade deltagare
-            ViewBag.Registations = await _context.Registrations
+            ViewBag.Registrations = await _context.Registrations
             .Include(r => r.Competition)
             .Include(r => r.PublicUser)
             .Where(r => r.CompetitionId == id)
