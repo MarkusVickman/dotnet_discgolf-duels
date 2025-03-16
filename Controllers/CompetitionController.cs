@@ -62,6 +62,25 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
+            string? Id = _userManager.GetUserId(User);
+            var thisPublicUser = await _context.PublicUsers.FirstOrDefaultAsync(p => p.Id == Id);
+
+            var competition = await _context.Competitions
+                .Include(c => c.Course)
+                .Include(c => c.PublicUser)
+                .FirstOrDefaultAsync(m => m.CompetitionId == id);
+
+            if (competition == null)
+            {
+                return NotFound();
+            }
+
+            //Kontrollerar om personen har rättighet att besöka admin annars dirigeras den till publica sidan
+            if (thisPublicUser?.PublicUserId != competition.PublicUserId)
+            {
+                return RedirectToAction("PublicDetails", "Competition", new { id = competition.CompetitionId });
+            }
+
             // skickar med data från registrerade deltagare
             ViewBag.Registrations = await _context.Registrations
             .Include(r => r.Competition)
@@ -83,15 +102,6 @@ namespace discgolf_duels.Controllers
 
                 // Sätt playings i ViewBag
                 ViewBag.Playings = playings;
-            }
-
-            var competition = await _context.Competitions
-                .Include(c => c.Course)
-                .Include(c => c.PublicUser)
-                .FirstOrDefaultAsync(m => m.CompetitionId == id);
-            if (competition == null)
-            {
-                return NotFound();
             }
 
             return View(competition);

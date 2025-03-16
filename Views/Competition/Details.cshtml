@@ -10,17 +10,17 @@
             @functions {
     public string SumOfDigits(string throws, string par)
     {
-
-        if (throws.Contains('0'))
-        {
-            return "Playing";
-        }
-
         // Summera siffrorna i den första strängen
         int sumOfThrows = throws.Where(char.IsDigit).Sum(c => c - '0');
 
         // Summera siffrorna i den andra strängen (till exempel @model.course.par)
         int sumOfCoursePar = par.Where(char.IsDigit).Sum(c => c - '0');
+
+        //Koden nedan kan behöva formuleras om, lika så hur par-strängen är utformad. Det är med på restlistan
+        if (throws.Contains('0'))
+        {
+            return "Playing";
+        }
 
         if (sumOfThrows - sumOfCoursePar < 0) {
             return (sumOfThrows - sumOfCoursePar).ToString();

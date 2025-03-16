@@ -144,6 +144,7 @@ namespace discgolf_duels.Controllers
                 ViewBag.CompetitionName = play.Competition?.CompetitionName;
                 ViewBag.CourseName = play.Course!.CourseName;
                 ViewBag.CoursePar = play.Course.Par;
+                ViewBag.CompetitionId = play.CompetitionId;
             }
 
             return View(playing);
@@ -179,7 +180,7 @@ namespace discgolf_duels.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("edit", "Playing", new { id = playing.PlayingId });
             }
             
             ViewData["PlayId"] = new SelectList(_context.Plays, "PlayId", "PlayId", playing.PlayId);
