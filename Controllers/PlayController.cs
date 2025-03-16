@@ -46,7 +46,15 @@ namespace discgolf_duels.Controllers
         {
             if (id != 0)
             {
+
+                //Kontrollerar om tävlingen redan är startad i så fall går den inte att starta om.
                 var competition = await _context.Competitions.FindAsync(id);
+                if (competition != null)
+                {
+                    var hasCompStarted = await _context.Plays.AnyAsync(r => r.CompetitionId == competition.CompetitionId);
+
+                    return RedirectToAction("Details", "competition", new { id = id });
+                }
 
                 //Hämtar alla registrerade spelare till tävlingen
                 var thisRegistrations = await _context.Registrations
@@ -161,6 +169,6 @@ namespace discgolf_duels.Controllers
                 }
             }
             return RedirectToAction("index", "Home");
-        }    
+        }
     }
 }

@@ -130,12 +130,18 @@ namespace discgolf_duels.Controllers
                 return NotFound();
             }
 
-            //Hämtar aktuell "spelmall" och skickar med värden tilö vyn
+            //Hämtar aktuell "spelmall" och skickar med värden till vyn
             var play = await _context.Plays
                 .Include(p => p.Competition)
                 .Include(p => p.Course)
                 .Where(c => c.PlayId == playing.PlayId)
                 .FirstOrDefaultAsync();
+
+            // Hämtar alla playing-objekt från samma gruppspel och med samma PlayId, där GroupNr inte är 0, är med på restlistan för att kunna styra en hel grupp
+          /*  var playings = await _context.Playing
+                .Include(p => p.PublicUser)
+                .Where(p => p.GroupNr == playing.GroupNr && p.GroupNr != 0 && p.PlayId == playing.PlayId)
+                .ToListAsync();*/
 
             if (play != null)
             {
@@ -145,6 +151,7 @@ namespace discgolf_duels.Controllers
                 ViewBag.CourseName = play.Course!.CourseName;
                 ViewBag.CoursePar = play.Course.Par;
                 ViewBag.CompetitionId = play.CompetitionId;
+              //  ViewBag.Par = playing.Par;
             }
 
             return View(playing);
@@ -182,7 +189,7 @@ namespace discgolf_duels.Controllers
                 }
                 return RedirectToAction("edit", "Playing", new { id = playing.PlayingId });
             }
-            
+
             ViewData["PlayId"] = new SelectList(_context.Plays, "PlayId", "PlayId", playing.PlayId);
             ViewData["PublicUserId"] = new SelectList(_context.PublicUsers, "PublicUserId", "DisplayName", playing.PublicUserId);
             return View(playing);
@@ -214,7 +221,7 @@ namespace discgolf_duels.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var playing = await _context.Playing.FindAsync(id);
-            
+
             if (playing != null)
             {
                 _context.Playing.Remove(playing);
