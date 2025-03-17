@@ -45,10 +45,7 @@ namespace discgolf_duels.Controllers
         public async Task<IActionResult> Create(int id)
         {
             if (id != 0)
-            {
-
-
-                var competition = await _context.Competitions.FindAsync(id);
+            {                
                 //Kontrollerar om tävlingen redan är startad i så fall går den inte att starta om. Den är med på restlistan då jag inte vet om den ska med eller ej, funktionen fungerar dock
                 /*var competition = await _context.Plays.FirstOrDefaultAsync(r => r.CompetitionId == id);
                 /* if (competition != null)
@@ -63,6 +60,8 @@ namespace discgolf_duels.Controllers
                 .Include(r => r.PublicUser)
                 .Where(r => r.CompetitionId == id)
                 .ToListAsync();
+
+                var competition = await _context.Competitions.FindAsync(id);
 
                 //Läser in tävlingen bana
                 var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == competition!.CourseId);

@@ -268,9 +268,15 @@ namespace discgolf_duels.Controllers
             var competition = await _context.Competitions.FindAsync(id);
             if (competition != null)
             {
+                //Kontrollerar om tävlingen redan är startad i så fall går den inte att ta bort.
+                var hasCompStarted = await _context.Plays.AnyAsync(r => r.CompetitionId == competition.CompetitionId);
+                if (hasCompStarted)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
                 _context.Competitions.Remove(competition);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
