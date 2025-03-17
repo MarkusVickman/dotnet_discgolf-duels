@@ -48,8 +48,9 @@ namespace discgolf_duels.Controllers
             {
 
 
-                var competition = await _context.Plays.FirstOrDefaultAsync(r => r.CompetitionId == id);
+                var competition = await _context.Competitions.FindAsync(id);
                 //Kontrollerar om tävlingen redan är startad i så fall går den inte att starta om. Den är med på restlistan då jag inte vet om den ska med eller ej, funktionen fungerar dock
+                /*var competition = await _context.Plays.FirstOrDefaultAsync(r => r.CompetitionId == id);
                 /* if (competition != null)
                  {
                      var hasCompStarted = await _context.Plays.AnyAsync(r => r.CompetitionId == competition.CompetitionId);
